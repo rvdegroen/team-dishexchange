@@ -1,0 +1,206 @@
+/*****CUSTOM COLORS*****/
+:root {
+  --bg-color: #f3f3f3;
+  --light-bg-color: #ffffff;
+
+  --text-color: #4f4f4f;
+  --light-text-color: #a5a5a5;
+
+  --primary-color: #41c1a5;
+  --secondary-color: #fcab61;
+
+  --quality-filled: #fcbe61;
+  --quality-not-filled: #c5c5c5;
+
+  --empty-image: #dcdcdc;
+
+  --box-shadow-blur: #00000071;
+  --selected-color: #06896c;
+}
+
+*,
+*:before,
+*:after,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  padding: 20px 40px;
+}
+
+/*****TEXT STYLING*****/
+h1 {
+  font-weight: 400;
+  color: var(--text-color);
+  padding-bottom: 20px;
+}
+
+h2,
+h3 {
+  font-weight: 700;
+  color: var(--text-color);
+  padding: 0 0 10px;
+}
+
+p {
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*article in dish.ejs*/
+article {
+  background-color: var(--light-bg-color);
+  display: grid;
+  border-radius: 0.3em;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "one two";
+  box-shadow: 0 2px 10px var(--box-shadow-blur);
+}
+
+/*****FORM STYLING***/
+input {
+  width: 100%;
+  height: 2.5em;
+  border: 2px solid var(--light-text-color);
+  border-radius: 5px;
+  padding-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 0 0.8em;
+  font-size: 1em;
+}
+
+input[name="dishQuality"] {
+  accent-color: var(--primary-color);
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  padding-bottom: 10px;
+  font-weight: bold;
+  color: var(--text-color);
+  padding-top: 20px;
+}
+
+/*****SPECIFIC TEXT STYLING***/
+
+/***styling for dishes.ejs***/
+/*a > article > div > text*/
+.dishText {
+  grid-area: two;
+  padding: 1.5em 1em;
+}
+
+.dishText > p {
+  /*source: https://www.positioniseverything.net/css-character-limit*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/*a > article > div > image*/
+.dishImage {
+  background-color: rgb(88, 31, 58);
+  grid-area: one;
+  border-radius: 0.3em 0 0 0.3em;
+}
+
+/*text that shows quality is usually smaller*/
+.qualityText {
+  font-size: 0.9em;
+  padding-top: 10px;
+}
+
+/*floating action button background*/
+.floatingActionButton {
+  position: fixed;
+  right: 5%;
+  bottom: 15%;
+  color: var(--light-bg-color);
+  background-color: var(--primary-color);
+  padding: 0.1em 0.4em;
+  border-radius: 5em;
+  font-size: 3em;
+  box-shadow: 0 0 4px var(--box-shadow-blur);
+  font-weight: 700;
+}
+
+/***styling added for add-dishes.ejs***/
+.backButton {
+  padding-right: 1em;
+}
+
+/*p element in the form*/
+.heading {
+  color: green;
+}
+
+/*subtext in the form*/
+.subtext {
+  color: var(--light-text-color);
+  font-size: 0.8em;
+}
+
+.hidden {
+  display: none;
+}
+
+#video {
+  background-color: rgb(124, 37, 52);
+}
+
+#canvas {
+  background-color: rgb(226, 82, 106);
+}
+
+.h3dishDetails {
+  padding-top: 20px;
+}
+
+.formGroup {
+  display: flex;
+}
+
+/*****HOVER STATES (for pc only)*****/
+a:hover {
+  opacity: 0.5;
+}
+
+.backButton:hover {
+  color: var(--text-color);
+}
+
+/*****ACTIVE STATES*****/
+a:active {
+  opacity: 0.5;
+}
+
+.backButton:active {
+  color: var(--text-color);
+}
+
+/*****FOCUS STATES*****/
+
+input:focus {
+  outline: none !important;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
