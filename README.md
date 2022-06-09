@@ -1,18 +1,25 @@
-# Welcome to my Tech repository!
-
 # License
 
 We're using the GNU General Public License v3.0 so please keep this in mind if you'd like to use my code.
 
 # About Dish Exchange
 
-For this course, I'm meant to make a feature of my own matching application. My matching application is called "Dish Exchange". Conceptually it's an app in which users can sign themselves up for and they can add their own dishes to their accounts, they would like to trade with others. You can then match with other people's dishes, contact them and talk about the dish exchange that will possibly take place. You are also able to set preferences.
+Dish exchange is supposed to be matching application app, where people can add their dishes to their profile and match with other people's dishes to eventually "exchange" their own home-made dishes in person. This application is for a school project so not all features are available. In [features](##-Features) we will explain which features are available.
+
+## Why Dish Exchange?
+
+This concept is for people who love cooking, tasting food and love to share their food with the world. It's an easy and cheaper way to experience food from all kinds of people you would be able to find on the app. It was inspired by people who are big foodies, who cannot afford all the time to eat out and try different dishes and flavours, because that can be very expensive. 
 
 ## Features
 
-For this course, I'm not meant to make the entire app, because we would need a lot more time for that than we currently have, so the assignment is to make one of the features in my concept.
+As explained earlier, this project is a school project, so not all features you would expact a matching application to have, will be available. 
 
-The feature I will make is being able to add dishes to your menu, display them and being able to see the detail page of a dish. If I were to have more time left, I would also like to work on being able to edit the dish you created.
+We have several features, such as: 
+
+1. being able to register an acoount
+2. being able to login 
+3. being able to create, modify and delete your own dishes within the application 
+5. Being able to filter your own created dishes
 
 # How do you use our application?
 
