@@ -4,7 +4,7 @@ We're using the GNU General Public License v3.0 so please keep this in mind if y
 
 # About Dish Exchange
 
-Dish exchange is supposed to be matching application app, where people can add their dishes to their profile and match with other people's dishes to eventually "exchange" their own home-made dishes in person. This application is for a school project so not all features are available. In [features](##-Features) we will explain which features are available.
+Dish exchange is supposed to be matching application app, where people can add their dishes to their profile and match with other people's dishes to eventually "exchange" their own home-made dishes in person. This application is for a school project so not all features are available. In [Features](#features) we will explain which features are available.
 
 ## Why Dish Exchange?
 
