@@ -2,19 +2,19 @@
 
 # License
 
-I'm using the GNU General Public License v3.0 so please keep this in mind if you'd like to use my code.
+We're using the GNU General Public License v3.0 so please keep this in mind if you'd like to use my code.
 
-# Dish Exchange
+# About Dish Exchange
 
 For this course, I'm meant to make a feature of my own matching application. My matching application is called "Dish Exchange". Conceptually it's an app in which users can sign themselves up for and they can add their own dishes to their accounts, they would like to trade with others. You can then match with other people's dishes, contact them and talk about the dish exchange that will possibly take place. You are also able to set preferences.
 
-## The feature I will make
+## Features
 
 For this course, I'm not meant to make the entire app, because we would need a lot more time for that than we currently have, so the assignment is to make one of the features in my concept.
 
 The feature I will make is being able to add dishes to your menu, display them and being able to see the detail page of a dish. If I were to have more time left, I would also like to work on being able to edit the dish you created.
 
-# How do you use my application?
+# How do you use our application?
 
 To help you use my application, I set up a guide on how to use it.
 
@@ -83,3 +83,7 @@ To be able to use Spoonacular, you will need an API key. I'm only using spoonacu
 
 Now you should have everything you need and you're ready to go!
 test
+
+# Contributors
+
+We worked as a team of 4 with the following team members: [Ruben Finnerud](https://github.com/rubenfin), [Vanessa Choe](https://github.com/VanessaChoe), [Dave Dankwah](https://github.com/davidsd29) and [Roshnie de Groen](https://github.com/rvdegroen).
