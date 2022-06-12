@@ -22,4 +22,18 @@ form.post("/add-dish", async (req, res) => {
   res.redirect(`/dish/${insertedId}`);
 });
 
+// INSERT USER
+form.post('/register', async (req, res) => {
+		await users.insertOne({
+			name: req.body.name,
+			country: req.body.country,
+			city: req.body.city,
+			phone: req.body.phonenumber,
+			dob: req.body.dob,
+      email: req.body.email,
+			username: req.body.username,
+			password: req.body.psw,
+		});
+	})
+
 module.exports = form;

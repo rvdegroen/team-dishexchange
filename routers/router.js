@@ -12,6 +12,19 @@ connectDB();
 
 // homepage
 router.get("/", async (req, res) => {
+  res.render("pages/home");
+});
+
+// form pages
+router.get("/register", (req, res) => {
+  res.render("pages/register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("pages/login");
+});
+
+router.get("/overview", async (req, res) => {
   // I want to retrieve data from mongoDB with .find, which returns a cursor
   const cursor = await dishesCollection.find({}, {});
 
@@ -49,5 +62,7 @@ router.get("/dish/:dishId", async (req, res) => {
     dish,
   });
 });
+
+
 
 module.exports = router;

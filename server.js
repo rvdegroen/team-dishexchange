@@ -20,6 +20,8 @@ app.set("views", "./views");
 let database;
 // Variable of dishes collection within dish-exchange
 let dishesCollection;
+// Variable of users collection within dish-exchange
+let users;
 
 // CONNECT DATABASE
 connectDB();
