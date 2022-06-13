@@ -24,15 +24,24 @@ let dishesCollection;
 
 // CONNECT DATABASE
 async function run() {
-  // Connect the client to url that's saved in .env file
-  await client.connect();
-  // Establish and verify connection
-  await client.db("admin").command({ ping: 1 });
-  console.log("Connected successfully to server");
-  // Variable of the database dish-exchange
-  database = client.db("dish-exchange");
-  // Variable of dishes collection within dish-exchange
-  dishesCollection = database.collection("dishes");
+  try {
+    // Connect client to url that's save in .env (server)
+    await client.connect();
+    // Establish and  verify connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Connected successfully to server");
+    // Variable of dish-exchange database
+    database = client.db("dish-exchange");
+    // Variable of dishes collection within dish-exchange
+    dishesCollection = database.collection("dishes");
+    // NEW
+  } catch (err) {
+    // TEMPORARY
+    // I want to show the error with error message in a (Server error response)
+    console.dir(err);
+    // if I wanted to show it up on the 404 page as variable use next line below:
+    // res.render("pages/404", { error: err.message });
+  }
 }
 run();
 
@@ -69,7 +78,7 @@ app.get("/add-dish", (req, res) => {
 // add-dish post into mongoDB
 app.post("/add-dish", async (req, res) => {
   // NEW
-  // stuff that can potentially throw an error
+  // using try & catch for things that could potentially throw an error
   try {
     const newDish = await dishesCollection.insertOne({
       name: req.body.dishName,
@@ -83,7 +92,7 @@ app.post("/add-dish", async (req, res) => {
     const insertedId = newDish.insertedId;
     // using ``, because then I can use the ${} to insert variables (template literals)
     res.redirect(`/dish/${insertedId}`);
-    // if something goes wrong then it will stop the code in try and go to catch to show the error
+    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.render("pages/add-dish", { error: err.message });
   }
@@ -107,10 +116,6 @@ app.get("/dish/:dishId", async (req, res) => {
     dish,
   });
 });
-
-// NEW app.get update page
-
-// update operation app.get
 
 // 404 error pages
 app.get("*", (req, res) => {
