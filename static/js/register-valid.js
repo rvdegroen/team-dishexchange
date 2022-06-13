@@ -73,7 +73,7 @@ form.submit.addEventListener("click", (e) => {
   });
 
   if (error == false) {
-
+    contactFormulier.submit();
     registerd();
     console.log("ready to send to the database");
   }

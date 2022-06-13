@@ -1,6 +1,6 @@
 <%-include('../partials/header');%>
 
-<form action="/login" method="POST" id="register">
+<form action="/user/login" method="POST" id="register">
 
     <h1>Login</h1>
 
@@ -13,7 +13,7 @@
             <legend for="psw">Password</legend>
             <input type="password" name="psw" id="psw">
         </fieldset>
-<span>Don't have an acount? <a href="/register">Register now!</a></span>
+<span>Don't have an acount? <a href="/user/register">Register now!</a></span>
         <input type="submit" class="btn" id="submit" value="Sign in">
 
     </form>

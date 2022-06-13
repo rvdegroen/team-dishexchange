@@ -4,27 +4,11 @@ const connectDB = require("../config/db");
 
 const { ObjectId } = require("mongodb");
 
-const router = express.Router();
+const dishes = express.Router();
 
 connectDB();
 
-// ROUTES
-
-// homepage
-router.get("/", async (req, res) => {
-  res.render("pages/home");
-});
-
-// form pages
-router.get("/register", (req, res) => {
-  res.render("pages/register");
-});
-
-router.get("/login", (req, res) => {
-  res.render("pages/login");
-});
-
-router.get("/overview", async (req, res) => {
+dishes.get("/overview", async (req, res) => {   
   // I want to retrieve data from mongoDB with .find, which returns a cursor
   const cursor = await dishesCollection.find({}, {});
 
@@ -40,13 +24,31 @@ router.get("/overview", async (req, res) => {
 });
 
 // add-dish page
-router.get("/add-dish", (req, res) => {
+dishes.get("/add-dish", (req, res) => {
   res.render("pages/add-dish");
 });
 
+// add-dish post into mongoDB
+dishes.post("/add-dish", async (req, res) => {
+  const newDish = await dishesCollection.insertOne({
+    name: req.body.dishName,
+    quality: req.body.dishQuality,
+    ingredients: req.body.ingredients.split(","),
+    tags: req.body.tags,
+    img: "test.jpeg",
+  });
+
+  // console log will return the insertedId
+  // console.log("newDish", newDish);
+  const insertedId = newDish.insertedId;
+  // using ``, because then I can use the ${} to insert variables (template literals)
+  res.redirect(`/dish/${insertedId}`);
+});
+
+
 // dish-details page
 // dishId has the same Id as insertedId from line 79, because that's where you go redirected
-router.get("/dish/:dishId", async (req, res) => {
+dishes.get("/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
   console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
@@ -63,6 +65,4 @@ router.get("/dish/:dishId", async (req, res) => {
   });
 });
 
-
-
-module.exports = router;
+module.exports = dishes ;
