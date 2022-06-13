@@ -15,7 +15,9 @@
 
     <fieldset class="required">
         <legend for="name">Name</legend>
-        <input type="text" name="name" placeholder="" id="name">
+        <input type="text" name="name" placeholder="" minlength="10" id="name">
+        <p class="forgiveness">Must contain 10 characters</p>
+    </fieldset>
     
     <fieldset class="required">
         <legend for="country">Country</legend>
@@ -34,8 +36,10 @@
     
     <fieldset class="required">
         <legend for="dob">Date of birth</legend>
-        <input type="date"  name="dob" id="dob">
+        <input type="date"  name="dob" min="1922-01-01" id="dob">
         <p class="error-input"></p>
+        <p class="forgiveness">DD-MM-YYYY</p>
+        
     </fieldset>
 
     <fieldset class="required">
@@ -50,7 +54,8 @@
     
     <fieldset class="required">
         <legend for="psw">Password</legend>
-        <input type="password"  name="psw" placeholder="" id="psw">
+        <input type="password"  name="psw" placeholder="" minlength="10" id="psw">
+        <p class="forgiveness">Must contain 10 characters</p>
     </fieldset>
     
     <fieldset class="required">
@@ -61,8 +66,5 @@
     <input type="submit" class="btn" id="submit" value="Create your account">
 
 </form>
-
-
-
 
 <%-include('../partials/footer');%>
