@@ -79,11 +79,6 @@ input[type="text"] {
   border-radius: 5px;
 }
 
-/*this makes the outer circle black and inside primary color*/
-input[name="dishQuality"] {
-  accent-color: var(--primary-color);
-}
-
 fieldset {
   border: none;
   display: flex;
@@ -209,10 +204,10 @@ input[type="radio"] {
 
 #autodetectFoodButton {
   color: var(--light-bg-color);
-  border: solid 3px var(--text-color);
+  border: none;
   border-radius: 3px;
-  padding: 0.5em;
-  background: var(--text-color);
+  padding: 0.9em;
+  background: var(--secondary-color);
   margin: 0.5em 0;
   margin-top: 0.5em;
   width: 10em;
@@ -266,3 +261,10 @@ input:focus {
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
 }
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+  color: var(--primary-color);
+}
+
+/*****BEFORE AND AFTER STATES*****/
