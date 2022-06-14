@@ -148,11 +148,13 @@ app.post("/dish/:dishId/edit", async (req, res) => {
   // using try & catch for things that could potentially throw an error
   try {
     await dishesCollection.updateOne(query, {
-      name: req.body.dishName,
-      quality: req.body.dishQuality,
-      ingredients: req.body.ingredients.split(","),
-      tags: req.body.tags,
-      img: "test.jpeg",
+      $set: {
+        name: req.body.dishName,
+        quality: req.body.dishQuality,
+        ingredients: req.body.ingredients.split(","),
+        tags: req.body.tags,
+        img: "test.jpeg",
+      },
     });
     // using ``, because then I can use the ${} to insert variables (template literals)
     res.redirect(`/dish/${urlId}`);
