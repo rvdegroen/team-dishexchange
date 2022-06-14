@@ -5,8 +5,8 @@ const form = {
   phoneNumber: document.querySelector(" #register #phonenumber"),
   dob: document.querySelector(" #register #dob"),
   email: document.querySelector("#register #email"),
-  username: document.querySelector("#register #psw"),
-  psw: document.querySelector("#register #psw"),
+  username: document.querySelector("#register #username"),
+  psw: document.querySelector("#register #password"),
   pswRepeat: document.querySelector("#register #psw-repeat"),
   submit: document.querySelector("#register #submit"),
 };
@@ -43,7 +43,7 @@ form.submit.addEventListener("click", (e) => {
 
    
 
-  e.preventDefault(); //cancel main action
+  // e.preventDefault(); //cancel main action
 
   let error = false;
 
@@ -73,11 +73,16 @@ form.submit.addEventListener("click", (e) => {
   });
 
   if (error == false) {
-    contactFormulier.submit();
+ 
     registerd();
     console.log("ready to send to the database");
+    // submitForm();
   }
 });
+
+function submitForm(){
+  contactFormulier.submit();
+}
 
 function registerd() {
   registrationResponse.text.textContent =

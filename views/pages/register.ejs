@@ -9,13 +9,13 @@
     </div>
 </div>
 
-<form action="/user/register" method="POST" id="register">
+<form action="/user/registerForm" method="POST" id="register">
 
     <h1>Sign Up</h1>
 
     <fieldset class="required">
         <legend for="name">Name</legend>
-        <input type="text" name="name" placeholder="" minlength="10" id="name">
+        <input type="text" name="name" placeholder="" id="name">
         <p class="forgiveness">Must contain 10 characters</p>
     </fieldset>
     
@@ -53,8 +53,8 @@
     </fieldset>
     
     <fieldset class="required">
-        <legend for="psw">Password</legend>
-        <input type="password"  name="psw" placeholder="" minlength="10" id="psw">
+        <legend for="password">Password</legend>
+        <input type="password"  name="password" placeholder="" id="password">
         <p class="forgiveness">Must contain 10 characters</p>
     </fieldset>
     

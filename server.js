@@ -1,13 +1,19 @@
+if (process.env.NODE_ENV !== "production"){
+  require("dotenv").config();
+}
+
 // REQUIRE VARIABLES
-require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
+const flash = require("express-flash")
+const session = require("express-session")
+const passport = require("passport");
+const methodOverride = require("method-override");
 
 // VARIABLES
 const app = express();
-// connection uri to database
-
 
 // CONFIGURATION
 // sets configuration
@@ -28,8 +34,11 @@ connectDB();
 
 // ROUTES
 const main = require("./routers/main");
-const users = require("./routers/users");
+const gebruiker = require("./routers/users");
 const dishes = require("./routers/dishes");
+
+
+
 
 // MIDDLEWARE
 // express knows all my static files are in my static folder
@@ -38,8 +47,9 @@ app.use(express.static("static"));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride("_method"))
 app.use("/", main);
-app.use("/user/", users);
+app.use("/user/", gebruiker);
 app.use("/dishes/", dishes);
 
 app.use((req, res) => {

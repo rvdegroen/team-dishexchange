@@ -8,20 +8,7 @@ const dishes = express.Router();
 
 connectDB();
 
-dishes.get("/overview", async (req, res) => {   
-  // I want to retrieve data from mongoDB with .find, which returns a cursor
-  const cursor = await dishesCollection.find({}, {});
 
-  // I have a cursor but I want my collection with all the dishes documents
-  const allDishes = await cursor.toArray();
-  // console.log(allDishes);
-
-  res.render("pages/dishes", {
-    // variables in the front-end
-    numberOfDishes: allDishes.length,
-    allDishes,
-  });
-});
 
 // add-dish page
 dishes.get("/add-dish", (req, res) => {

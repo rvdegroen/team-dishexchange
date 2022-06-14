@@ -1,7 +1,9 @@
 <%-include('../partials/header');%>
 
-
-    <h1>Your Menu</h1>
+<form action="/user/logout?_method=DELETE" method="POST">
+    <button type="submit">Log out</button>
+</form>
+    <h1>Hi <%= name %> Your Menu</h1>
     <h2><%= numberOfDishes %> dishes</h2>
     <!--I want to include the partial dish, x (numderOfDishes) times into this page-->
     <%-include('../partials/dish') %>

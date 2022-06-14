@@ -96,6 +96,7 @@ article {
   background-color: var(--bg-color);
   color: var(--primary-color);
 }
+
 /*****FORM STYLING***/
 input {
   width: 100%;
@@ -143,6 +144,7 @@ legend::after {
 span a{
   color: var(--primary-color);
 }
+
 /*****FORM RESPONSE***/
 .form-respond {
   position: absolute;

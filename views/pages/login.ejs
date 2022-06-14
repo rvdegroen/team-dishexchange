@@ -1,17 +1,25 @@
 <%-include('../partials/header');%>
 
-<form action="/user/login" method="POST" id="register">
+<% if (messages.error) {%>
+
+    <%= messages.error %>
+        <% }; %>
+    <% console.log(messages.error) %>
+<form action="/user/loginForm" method="POST" id="login">
 
     <h1>Login</h1>
 
+
+
+
         <fieldset class="required">
-            <legend for="username">Username</legend>
-            <input type="text" name="username" id="username">
+            <legend for="email">Email</legend>
+            <input type="email" name="email" id="email">
         </fieldset>
         
         <fieldset class="required">
             <legend for="psw">Password</legend>
-            <input type="password" name="psw" id="psw">
+            <input type="password" name="password" id="password">
         </fieldset>
 <span>Don't have an acount? <a href="/user/register">Register now!</a></span>
         <input type="submit" class="btn" id="submit" value="Sign in">
