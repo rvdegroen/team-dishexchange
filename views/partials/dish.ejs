@@ -5,17 +5,25 @@
 
   <article>
 
-    <div class="dishText">
-
-      <form action="/favoriteDish" method="post">
+    <form action="/favoriteDish" method="post">
   
-        <button name="like" type="submit" value="">
-            
-            <img src="images/hartje.png" id="emptyHeart" alt="likeButton">
+      <% if(allDishes.like==true){ %>
 
+        <button name="like" type="submit" value="">
+            <img src="images/hartje.png" id="emptyHeart" alt="likeButton">
         </button>
 
-      </form>
+      <% } else{ %>
+
+        <button name="like" type="submit" value="">
+          <img src="images/roodHartje.png" id="emptyHeart" alt="likeButton">
+        </button>
+
+      <%} %>
+
+    </form>
+    
+    <div class="dishText">
 
       <h3><%=allDishes[arrayNumber].name %></h3>
       <p><%=allDishes[arrayNumber].tags %></p>
