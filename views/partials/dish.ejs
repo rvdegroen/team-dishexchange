@@ -2,9 +2,20 @@
 <!--for every dish in allDishes, I want to loop and I do this with arrayNumber, which is a number-->
 <% for (let arrayNumber = 0; arrayNumber < allDishes.length; arrayNumber++) { %>
 <a href="/dish/<%=allDishes[arrayNumber]._id%>">
+
   <article>
 
     <div class="dishText">
+
+      <form action="/favoriteDish" method="post">
+  
+        <button name="like" type="submit" value="">
+            
+            <img src="images/hartje.png" id="emptyHeart" alt="likeButton">
+
+        </button>
+
+      </form>
 
       <h3><%=allDishes[arrayNumber].name %></h3>
       <p><%=allDishes[arrayNumber].tags %></p>

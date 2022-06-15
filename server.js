@@ -101,6 +101,13 @@ app.get("/dish/:dishId", async (req, res) => {
   });
 });
 
+// favoriteDish page
+
+app.get('/favoriteDish', (req, res) => {
+  res.render('pages/favoriteDish')
+  console.log("favoriteDish")
+});
+
 // 404 error pages
 app.get("*", (req, res) => {
   res.send("This page does not exist!");
