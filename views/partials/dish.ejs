@@ -3,14 +3,18 @@
 <% for (let arrayNumber = 0; arrayNumber < allDishes.length; arrayNumber++) { %>
 <a href="/dish/<%=allDishes[arrayNumber]._id%>">
   <article>
+
     <div class="dishText">
+
       <h3><%=allDishes[arrayNumber].name %></h3>
       <p><%=allDishes[arrayNumber].tags %></p>
       <p class="qualityText">Quality: <%=allDishes[arrayNumber].quality %></p>
     </div>
+
     <div class="dishImage">
       <img src="static/images/<%= allDishes[arrayNumber].img %>" alt="" />
     </div>
+
   </article>
 </a>
 <% } %>

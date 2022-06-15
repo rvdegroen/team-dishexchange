@@ -68,6 +68,20 @@ article {
   box-shadow: 0 2px 10px var(--box-shadow-blur);
 }
 
+/*button and image in dish.ejs*/
+article button{
+  background-color: var(--primary-color);
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 15em;
+  border: none;
+}
+
+article button img{
+  width: 2.3em;
+  height: 2.3em;
+}
+
 /*****FORM STYLING***/
 input {
   width: 100%;

@@ -1,2 +1,0 @@
-DATABASE_URL=<your-mongodb-connection-string>
-API_KEY=<your-api-key>

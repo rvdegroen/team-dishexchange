@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 // VARIABLES
 const app = express();
 // connection uri to database
-const url = process.env.DATABASE_URL;
+const url = process.env.DB_URI;
 
 // CONFIGURATION
 // sets configuration
@@ -26,7 +26,7 @@ let dishesCollection;
 async function run() {
   // Connect the client to url that's saved in .env file
   await client.connect();
-  // Establish and verify connection
+  // Establish and verify connection-
   await client.db("admin").command({ ping: 1 });
   console.log("Connected successfully to server");
   // Variable of the database dish-exchange
