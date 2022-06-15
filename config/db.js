@@ -26,7 +26,7 @@ const client = new MongoClient(url);
   database = client.db(process.env.DB_NAME);
   // Variable of dishes collection within dish-exchange
   dishesCollection = database.collection("dishes");
-  user = database.collection("users");
+  userCollection = database.collection("users");
 }
 
 

@@ -18,6 +18,7 @@ initializePassport(
   (id) => users.find((user) => user.id === id)
 );
 
+// let userCollection;
 const users = [];
 
 app.use(express.urlencoded({ extended: false }));
@@ -40,7 +41,9 @@ app.get("/register", (req, res) => {
 
 // INSERT USER
 app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
-  // await user.insertOne({
+  // try {
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  // await userCollection.insertOne({
   //   name: req.body.name,
   //   country: req.body.country,
   //   city: req.body.city,
@@ -51,6 +54,7 @@ app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
   //   password: hashedPassword,
   //   mydish: [],
   // });
+
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     users.push({
@@ -69,10 +73,6 @@ app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
   } catch {
     res.redirect("/user/register");
   }
-
-  console.log(users);
-
-  // res.redirect("/dishes/overview");
 });
 
 // LOGIN
@@ -100,10 +100,10 @@ app.delete("/logout", (req, res) => {
 
 app.get("/overview", checkAuthenticated, async (req, res) => {
   // I want to retrieve data from mongoDB with .find, which returns a cursor
-  const cursor = await dishesCollection.find({}, {});
+  const dish = await dishesCollection.find({}, {});
 
   // I have a cursor but I want my collection with all the dishes documents
-  const allDishes = await cursor.toArray();
+  const allDishes = await dish.toArray();
   // console.log(allDishes);
 
   res.render("pages/dishes", {
@@ -118,7 +118,7 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-   res.redirect("/");
+  res.redirect("/");
 }
 
 function checkNotAuthenticated(req, res, next) {

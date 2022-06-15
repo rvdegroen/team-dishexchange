@@ -7,9 +7,6 @@ if (process.env.NODE_ENV !== "production"){
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
-const flash = require("express-flash")
-const session = require("express-session")
-const passport = require("passport");
 const methodOverride = require("method-override");
 
 // VARIABLES
@@ -27,17 +24,15 @@ let database;
 // Variable of dishes collection within dish-exchange
 let dishesCollection;
 // Variable of users collection within dish-exchange
-let user;
+let userCollection;
 
 // CONNECT DATABASE
 connectDB();
 
 // ROUTES
 const main = require("./routers/main");
-const gebruiker = require("./routers/users");
+const users = require("./routers/users");
 const dishes = require("./routers/dishes");
-
-
 
 
 // MIDDLEWARE
@@ -49,7 +44,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride("_method"))
 app.use("/", main);
-app.use("/user/", gebruiker);
+app.use("/user/", users);
 app.use("/dishes/", dishes);
 
 app.use((req, res) => {
