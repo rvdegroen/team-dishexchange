@@ -152,33 +152,37 @@ app.get("/dish/:dishId/edit", async (req, res) => {
 });
 
 // NEW
-app.post("/dish/:dishId/edit", upload.single("uploadImage"), async (req, res) => {
-  const urlId = req.params.dishId;
-  console.log("urlId", urlId);
-  // a query will basically filter the information you're looking for
-  // we need to convert the urlId from "string" to (a new variable) objectId
-  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-  const query = { _id: new ObjectId(urlId) };
-  const dish = await dishesCollection.findOne(query);
-  // using try & catch for things that could potentially throw an error
-  try {
-    await dishesCollection.updateOne(query, {
-      $set: {
-        name: req.body.dishName,
-        quality: req.body.dishQuality,
-        ingredients: req.body.ingredients.split(","),
-        tags: Array.isArray(req.body.tags) ? req.body.tags : [req.body.tags],
-        // it doesn't comes back as undefined if it doesn't exist
-        img: req?.file?.filename,
-      },
-    });
-    // using ``, because then I can use the ${} to insert variables (template literals)
-    res.redirect(`/dish/${urlId}`);
-    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
-  } catch (err) {
-    res.render("pages/edit-dish", { error: err.message, dish });
+app.post(
+  "/dish/:dishId/edit",
+  upload.single("uploadImage"),
+  async (req, res) => {
+    const urlId = req.params.dishId;
+    console.log("urlId", urlId);
+    // a query will basically filter the information you're looking for
+    // we need to convert the urlId from "string" to (a new variable) objectId
+    // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
+    const query = { _id: new ObjectId(urlId) };
+    const dish = await dishesCollection.findOne(query);
+    // using try & catch for things that could potentially throw an error
+    try {
+      await dishesCollection.updateOne(query, {
+        $set: {
+          name: req.body.dishName,
+          quality: req.body.dishQuality,
+          ingredients: req.body.ingredients.split(","),
+          tags: Array.isArray(req.body.tags) ? req.body.tags : [req.body.tags],
+          // it doesn't comes back as undefined if it doesn't exist
+          img: req?.file?.filename,
+        },
+      });
+      // using ``, because then I can use the ${} to insert variables (template literals)
+      res.redirect(`/dish/${urlId}`);
+      // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
+    } catch (err) {
+      res.render("pages/edit-dish", { error: err.message, dish });
+    }
   }
-});
+);
 
 // NEW
 // To delete a document
