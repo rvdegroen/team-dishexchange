@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <%-include('../partials/head');%>
+
+<body>
+
+    <main>
+         
+        <% myFavoriteDish.forEach(function(allDishes[arrayNumber]){ %>
+            
+            <%-include('../partials/dish', {<% allDishes[arrayNumber]: allDishes[arrayNumber]}); %>
+
+        <% }); %>
+
+    </main>
+</body>
+</html>

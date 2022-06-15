@@ -102,33 +102,29 @@ app.get("/dish/:dishId", async (req, res) => {
 });
 
 // favorite dish page
-// app.get('/favoriteDish', (req, res) => {
-//   res.render('pages/favoriteDish')
-//   console.log("favoriteDish")
-// });
-
 app.get('/favoriteDish', async (req, res) => {
-  
-  const myFavoriteDishes = await db.collection('dishes').find({ 
+
+  const myFavoriteDish = await dishesCollection.find({ 
     like: true}).toArray();
     
-    console.log(myFavoriteDishes) 
-res.render('/', {myFavoriteDishes});
+    console.log(myFavoriteDish) 
+  res.render('pages/favoriteDish', {myFavoriteDish});
+
 });
 
 app.post("/favoriteDish", async (req, res) => {
 
-  const myFavoriteDishes = await db.collection('dishes').updateOne(
+  const myFavoriteDish = await dishesCollection.updateOne(
     {
     _id: ObjectId(req.body.like)
     },
     {
     $set: {like: true,}, 
     }
-    );
+  );
 
-    console.log(myFavoriteDishes) 
-res.redirect('/favoriteDish');
+  console.log(myFavoriteDish)
+  res.redirect('/favoriteDish');
 });
 
 // 404 error pages

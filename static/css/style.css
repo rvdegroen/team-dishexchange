@@ -69,22 +69,14 @@ article {
 }
 
 /*button and image in dish.ejs*/
-article .dishText form{
-  margin-left: auto;
-}
-
-article .dishText button{
-  background-color: var(--primary-color);
-  width: 1.5em;
-  height: 1.5em;
-  margin-left: 15em;
+form button{
+  color: transparent;
+  background-color: transparent;
   border: none;
-  position: absolute;
+  display: flex;
 }
-
-article .dishText button img{
+form button img{
   width: 2.3em;
-  height: 2.3em;
 }
 
 /*****FORM STYLING***/

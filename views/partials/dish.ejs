@@ -1,39 +1,44 @@
 <!--This is a template for a dish, displayed on the dishes.ejs page-->
 <!--for every dish in allDishes, I want to loop and I do this with arrayNumber, which is a number-->
 <% for (let arrayNumber = 0; arrayNumber < allDishes.length; arrayNumber++) { %>
-<a href="/dish/<%=allDishes[arrayNumber]._id%>">
-
-  <article>
-
-    <form action="/favoriteDish" method="post">
-  
-      <% if(allDishes.like==true){ %>
-
-        <button name="like" type="submit" value="">
-            <img src="images/hartje.png" id="emptyHeart" alt="likeButton">
-        </button>
-
-      <% } else{ %>
-
-        <button name="like" type="submit" value="">
-          <img src="images/roodHartje.png" id="emptyHeart" alt="likeButton">
-        </button>
-
-      <%} %>
-
-    </form>
+  <a href="/dish/<%=allDishes[arrayNumber]._id%>">
     
-    <div class="dishText">
-
-      <h3><%=allDishes[arrayNumber].name %></h3>
-      <p><%=allDishes[arrayNumber].tags %></p>
-      <p class="qualityText">Quality: <%=allDishes[arrayNumber].quality %></p>
-    </div>
-
-    <div class="dishImage">
-      <img src="static/images/<%= allDishes[arrayNumber].img %>" alt="" />
-    </div>
-
-  </article>
-</a>
-<% } %>
+    <article>
+  
+      <div>
+  
+        <form action="/favoriteDish" method="post">
+  
+          <% if(allDishes[arrayNumber].like==true){ %>
+  
+              <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">  
+                  <img src="afbeeldingen/roodHartje.png" id="emptyHeart" alt="likeButton">
+              </button>
+  
+          <% } else{ %>
+  
+              <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">
+                  <img src="afbeeldingen/hartje.png" id="emptyHeart" alt="likeButton">
+              </button> 
+  
+          <%} %>
+  
+        </form>
+  
+      </div>
+  
+      <div class="dishText">
+  
+        <h3><%=allDishes[arrayNumber].name %></h3>
+        <p><%=allDishes[arrayNumber].tags %></p>
+        <p class="qualityText">Quality: <%=allDishes[arrayNumber].quality %></p>
+      </div>
+  
+      <div class="dishImage">
+        <img src="static/images/<%= allDishes[arrayNumber].img %>" alt="" />
+      </div>
+  
+    </article>
+  </a>
+  <% } %>
+  
