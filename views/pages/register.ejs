@@ -1,0 +1,71 @@
+<%-include('../partials/header');%>
+
+<div class="form-respond hidden">
+    <div>
+        <h2>Account has been registerd!</h2>
+        <p id="serverRespond"></p>
+        <p>Login to acces your account</p>
+        <a href="/" class="btn">Close</a>
+    </div>
+</div>
+
+<form action="/user/registerForm" method="POST" id="register">
+
+    <h1>Sign Up</h1>
+
+    <fieldset class="required">
+        <legend for="name">Name</legend>
+        <input type="text" name="name" placeholder="" id="name">
+        <p class="forgiveness">Must contain 10 characters</p>
+    </fieldset>
+    
+    <fieldset class="required">
+        <legend for="country">Country</legend>
+        <input type="text" name="country" placeholder="" id="country">
+    </fieldset>   
+    
+    <fieldset class="required">
+        <legend for="city">City</legend>
+        <input type="text" name="city" placeholder="" id="City">
+    </fieldset>   
+    
+    <fieldset>
+        <legend for="phonenumber">Phone number</legend>
+        <input type="tel" placeholder="" name="phonenumber" id="phonenumber">
+    </fieldset>  
+    
+    <fieldset class="required">
+        <legend for="dob">Date of birth</legend>
+        <input type="date"  name="dob" min="1922-01-01" id="dob">
+        <p class="error-input"></p>
+        <p class="forgiveness">DD-MM-YYYY</p>
+        
+    </fieldset>
+
+    <fieldset class="required">
+        <legend for="email">Email</legend>
+        <input type="email"  name="email" placeholder="" id="email">
+    </fieldset>
+    
+    <fieldset class="required">
+        <legend for="username">Username</legend>
+        <input type="text"  name="username" placeholder="" id="username">
+    </fieldset>
+    
+    <fieldset class="required">
+        <legend for="password">Password</legend>
+        <input type="password"  name="password" placeholder="" id="password">
+        <p class="forgiveness">Must contain 10 characters</p>
+    </fieldset>
+    
+    <fieldset class="required">
+        <legend for="psw-repeat">Repeat Password</legend>
+        <input type="password" name="psw-repeat" placeholder="" id="psw-repeat">
+    </fieldset>
+
+    <span>Have an acount? <a href="/login">Login now!</a></span>
+    <input type="submit" class="btn" id="submit" value="Create your account">
+
+</form>
+
+<%-include('../partials/footer');%>

@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%-include('../partials/head');%>
-  </head>
+<%-include('../partials/header');%>
 
-  <body>
+
     <h1><%-include('../partials/back')%><%=dish.name%></h1>
 
     <p id="error" class="error"><% if (typeof error !== 'undefined') {%> <%= error %><% } %></p>
@@ -24,6 +20,12 @@
       <% } %>
     </ul>
     <h3 class="h3dishDetails">Tags</h3>
+<<<<<<< HEAD
+    <!--first try with a p, but the array needs to be put into an ul > (times the dishIngredient) li -->
+    <p><%=dish.tags%></p>
+
+    <%-include('../partials/footer');%>
+=======
     <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
     <ul>
       <% for (let tag of dish.tags) { %>
@@ -55,3 +57,4 @@
     </script>
   </body>
 </html>
+>>>>>>> 541f977b7806a755a4faa19039be984eae297831
