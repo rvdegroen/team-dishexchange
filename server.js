@@ -3,11 +3,14 @@ if (process.env.NODE_ENV !== "production"){
 }
 
 // REQUIRE VARIABLES
-
+const connectDB = require("./config/db");
 const express = require("express");
 const bodyParser = require("body-parser");
-const connectDB = require("./config/db");
-const methodOverride = require("method-override");
+
+
+
+// const passport = require("passport");
+
 
 // VARIABLES
 const app = express();
@@ -31,7 +34,8 @@ connectDB();
 
 // ROUTES
 const main = require("./routers/main");
-const users = require("./routers/users");
+const register = require("./routers/user");
+// const login = require("./routers/login");
 const dishes = require("./routers/dishes");
 
 
@@ -42,9 +46,12 @@ app.use(express.static("static"));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(methodOverride("_method"))
+
+
+
 app.use("/", main);
-app.use("/user/", users);
+app.use("/user/", register);
+// app.use("/login/", login);
 app.use("/dishes/", dishes);
 
 app.use((req, res) => {
