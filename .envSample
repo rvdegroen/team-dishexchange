@@ -1,2 +1,7 @@
-DATABASE_URL=<your-mongodb-connection-string>
-API_KEY=<your-api-key>
+DB_HOST: 
+DB_NAME: 
+DB_USER: 
+DB_PASS: 
+
+SESSION_SECRET: 
+
