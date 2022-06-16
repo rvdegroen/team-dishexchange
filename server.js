@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
@@ -7,10 +7,7 @@ const connectDB = require("./config/db");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-
-
 // const passport = require("passport");
-
 
 // VARIABLES
 const app = express();
@@ -19,7 +16,6 @@ const app = express();
 // sets configuration
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
 
 // GLOBAL VARIABLES DATABASE - AFTER CLIENT IS CONNECTED
 // Variable of the database dish-exchange
@@ -38,7 +34,6 @@ const register = require("./routers/user");
 // const login = require("./routers/login");
 const dishes = require("./routers/dishes");
 
-
 // MIDDLEWARE
 // express knows all my static files are in my static folder
 app.use(express.static("static"));
@@ -46,8 +41,7 @@ app.use(express.static("static"));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
+// MIDDLEWARE MULTER | source: https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer/39650303#39650303
 
 app.use("/", main);
 app.use("/user/", register);
