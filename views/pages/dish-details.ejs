@@ -20,12 +20,6 @@
       <% } %>
     </ul>
     <h3 class="h3dishDetails">Tags</h3>
-<<<<<<< HEAD
-    <!--first try with a p, but the array needs to be put into an ul > (times the dishIngredient) li -->
-    <p><%=dish.tags%></p>
-
-    <%-include('../partials/footer');%>
-=======
     <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
     <ul>
       <% for (let tag of dish.tags) { %>
@@ -33,19 +27,20 @@
       <% } %>
     </ul>
     <div class="editButtons">
-      <a href="/dish/<%=dish._id%>/edit" class="primaryButton">Edit</a>
+      <a href="/dishes/edit/<%=dish._id%>" class="primaryButton">Edit</a>
       <a onclick="deleteDish('<%=dish._id%>')" class="deleteButton">Delete</a>
     </div>
 
+    <%-include('../partials/footer');%>
     <script>
       async function deleteDish(dishId) {
         // fetch sends HTTP request to run the method delete
-        const response = await fetch("/dish/" + dishId, {
+        const response = await fetch("/dishes/delete/" + dishId, {
           method: "DELETE",
         });
         // if response is .ok, it will redirect to the route
         if (response.ok) {
-          window.location.href = "/";
+          window.location.href = "/dishes/overview";
         } else {
           let error = document.getElementById("error");
           // show err.message from server.js
@@ -57,4 +52,3 @@
     </script>
   </body>
 </html>
->>>>>>> 541f977b7806a755a4faa19039be984eae297831
