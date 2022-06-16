@@ -31,7 +31,7 @@ connectDB();
 // ROUTES
 const main = require("./routers/main");
 const register = require("./routers/user");
-// const login = require("./routers/login");
+const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
 
 // MIDDLEWARE
@@ -41,16 +41,15 @@ app.use(express.static("static"));
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// MIDDLEWARE MULTER | source: https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer/39650303#39650303
 
-app.use("/", main);
-app.use("/user/", register);
-// app.use("/login/", login);
-app.use("/dishes/", dishes);
 
-app.use((req, res) => {
-  res.status(404).send("This page does not exist!");
-}); // 404 error pages
+app.use("/", main),
+  app.use("/user/", register),
+  app.use("/profile/", profile),
+  app.use("/dishes/", dishes),
+  app.use((req, res) => {
+    res.status(404).send("This page does not exist!");
+  }); // 404 error pages
 
 // APP LISTENING
 app.listen(process.env.PORT || 3000);

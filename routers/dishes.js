@@ -9,6 +9,7 @@ const multer = require("multer");
 // INCLUDED IN NODEJS
 const path = require("path");
 
+
 connectDB();
 
 // MIDDLEWARE MULTER | source: https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer/39650303#39650303
@@ -21,7 +22,6 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-
 
 // add-dish page
 dishes.get("/add-dish", (req, res) => {
@@ -46,17 +46,16 @@ dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
     // console.log("newDish", newDish);
     const insertedId = newDish.insertedId;
     // using ``, because then I can use the ${} to insert variables (template literals)
-    res.redirect(`/dish/${insertedId}`);
+    res.redirect(`/dishes/${insertedId}`);
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.render("pages/add-dish", { error: err.message });
   }
 });
 
-
 // dish-details page
 // dishId has the same Id as insertedId from line 79, because that's where you go redirected
-dishes.get("/dish/:dishId", async (req, res) => {
+dishes.get("/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
   console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
@@ -65,7 +64,7 @@ dishes.get("/dish/:dishId", async (req, res) => {
   const query = { _id: new ObjectId(urlId) };
   const dish = await dishesCollection.findOne(query);
   // making sure that when you click on a dish, it will console.log the dish
-  // console.log("dish", dish);
+  console.log("dish", dish);
 
   res.render("pages/dish-details", {
     // variables in the front-end
@@ -73,9 +72,8 @@ dishes.get("/dish/:dishId", async (req, res) => {
   });
 });
 
-
 // dish details edit page
-dishes.get("/dish/:dishId/edit", async (req, res) => {
+dishes.get("/edit/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
   console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
@@ -92,45 +90,41 @@ dishes.get("/dish/:dishId/edit", async (req, res) => {
   });
 });
 
-dishes.post(
-  "/dish/:dishId/edit",
-  upload.single("uploadImage"),
-  async (req, res) => {
-    const urlId = req.params.dishId;
-    console.log("urlId", urlId);
-    // a query will basically filter the information you're looking for
-    // we need to convert the urlId from "string" to (a new variable) objectId
-    // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-    const query = { _id: new ObjectId(urlId) };
-    const dish = await dishesCollection.findOne(query);
-    // using try & catch for things that could potentially throw an error
-    try {
-      await dishesCollection.updateOne(query, {
-        $set: {
-          name: req.body.dishName,
-          quality: req.body.dishQuality,
-          ingredients: req.body.ingredients.split(","),
-          tags: Array.isArray(req.body.tags) ? req.body.tags : [req.body.tags],
-          // it doesn't comes back as undefined if it doesn't exist
-          img: req?.file?.filename,
-        },
-      });
-      // using ``, because then I can use the ${} to insert variables (template literals)
-      res.redirect(`/dish/${urlId}`);
-      // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
-    } catch (err) {
-      res.render("pages/edit-dish", { error: err.message, dish });
-    }
-  }
-);
-
-dishes.delete("/dish/:dishId", async (req, res) => {
+dishes.post("/edit/:dishId", upload.single("uploadImage"), async (req, res) => {
   const urlId = req.params.dishId;
   console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
   // we need to convert the urlId from "string" to (a new variable) objectId
   // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
   const query = { _id: new ObjectId(urlId) };
+  const dish = await dishesCollection.findOne(query);
+  // using try & catch for things that could potentially throw an error
+  try {
+    await dishesCollection.updateOne(query, {
+      $set: {
+        name: req.body.dishName,
+        quality: req.body.dishQuality,
+        ingredients: req.body.ingredients.split(","),
+        tags: Array.isArray(req.body.tags) ? req.body.tags : [req.body.tags],
+        // it doesn't comes back as undefined if it doesn't exist
+        img: req?.file?.filename,
+      },
+    });
+    // using ``, because then I can use the ${} to insert variables (template literals)
+    res.redirect(`/dishes/${urlId}`);
+    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
+  } catch (err) {
+    res.render("pages/edit-dish", { error: err.message, dish });
+  }
+});
+
+dishes.delete("/delete/:dishId", async (req, res) => {
+  const urlId = req.params.dishId;
+  console.log("urlId", urlId);
+  // a query will basically filter the information you're looking for
+  // we need to convert the urlId from "string" to (a new variable) objectId
+  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
+  const query = { _id: urlId };
   // using try & catch for things that could potentially throw an error
   try {
     await dishesCollection.deleteOne(query);
@@ -143,5 +137,4 @@ dishes.delete("/dish/:dishId", async (req, res) => {
   }
 });
 
-
-module.exports = dishes ;
+module.exports = dishes;

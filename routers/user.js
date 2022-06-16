@@ -19,7 +19,7 @@ initializePassport(
 );
 
 // let userCollection;
-const users = require("./users");
+const users = require("./usersDB");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
