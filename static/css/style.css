@@ -68,6 +68,17 @@ article {
   box-shadow: 0 2px 10px var(--box-shadow-blur);
 }
 
+/*favoriteButton*/
+#favoritesButton{
+  background-color: transparent;
+  border: none;
+  margin-left: 97%;
+}
+
+#favoritesButton img{
+  width: 2.5em;
+}
+
 /*button and image in dish.ejs*/
 form button{
   color: transparent;

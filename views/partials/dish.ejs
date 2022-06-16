@@ -7,18 +7,18 @@
   
       <div>
   
-        <form action="/favoriteDish" method="post">
+        <form action="/favoriteDishes" method="post">
   
           <% if(allDishes[arrayNumber].like==true){ %>
   
               <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">  
-                  <img src="afbeeldingen/roodHartje.png" id="emptyHeart" alt="likeButton">
+                  <img src="images/roodHartje.png" id="emptyHeart" alt="likeButton">
               </button>
   
           <% } else{ %>
   
               <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">
-                  <img src="afbeeldingen/hartje.png" id="emptyHeart" alt="likeButton">
+                  <img src="images/hartje.png" id="emptyHeart" alt="likeButton">
               </button> 
   
           <%} %>
