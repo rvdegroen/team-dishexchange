@@ -1,4 +1,7 @@
 <%-include('../partials/header');%>
+<nav>
+    <button id="favoritesButton"><img src="/images/img/like.png" alt="Favorite dishes" /></button>
+</nav>
 
 <form action="/user/logout?_method=DELETE" method="POST">
     <button type="submit" id="logout" class="deleteButton">Log out</button>
@@ -9,5 +12,12 @@
     <%-include('../partials/dish') %>
     <!--for loop for oneofthedishes-->
     <a href="/dishes/add-dish" class="floatingActionButton">+</a>
+
+    <script>
+        const favoritesButton = document.getElementById("favoritesButton");
+        document.getElementById("favoritesButton").onclick = function () {
+            location.href = "/favorite/dishes";
+        };
+    </script>
 
 <%-include('../partials/footer');%>

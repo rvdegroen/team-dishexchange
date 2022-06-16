@@ -185,6 +185,28 @@ span a {
   margin-bottom: 20px;
 }
 
+/*favoriteButton*/
+#favoritesButton {
+  background-color: transparent;
+  border: none;
+  margin-left: 97%;
+}
+
+#favoritesButton img {
+  width: 2.5em;
+}
+
+#favorite button {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
+
+ #favorite button img {
+  width: 2.3em;
+}
+
 /*****SPECIFIC FORM STYLING***/
 
 input[type="file"] {

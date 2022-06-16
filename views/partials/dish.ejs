@@ -3,7 +3,29 @@
 <% for (let arrayNumber = 0; arrayNumber < allDishes.length; arrayNumber++) { %>
 <a href="/dishes/<%=allDishes[arrayNumber]._id%>">
   <article>
+    <div>
+    
+
+
     <div class="dishText">
+            <form action="/favorite/dishes" id="favorite" method="post">
+            
+              <% if(allDishes[arrayNumber].like==true){ %>
+            
+                <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">
+                  <img src="/images/img/like.png" id="emptyHeart" alt="likeButton">
+                </button>
+            
+                <% } else{ %>
+            
+                  <button name="like" type="submit" value="<%= allDishes[arrayNumber]._id %>">
+                    <img src="/images/img/unlike.png" id="emptyHeart" alt="likeButton">
+                  </button>
+            
+                  <%} %>
+            
+            </form>
+
       <h3><%=allDishes[arrayNumber].name %></h3>
       <p><%=allDishes[arrayNumber].tags %></p>
       <p class="qualityText">Quality: <%=allDishes[arrayNumber].quality %></p>

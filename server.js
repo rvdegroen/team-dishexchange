@@ -33,6 +33,7 @@ const main = require("./routers/main");
 const register = require("./routers/user");
 const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
+const favorite = require("./routers/like");
 
 // MIDDLEWARE
 // express knows all my static files are in my static folder
@@ -43,10 +44,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use("/", main),
-  app.use("/user/", register),
-  app.use("/profile/", profile),
-  app.use("/dishes/", dishes),
+app.use("/", main);
+  app.use("/user/", register);
+  app.use("/profile/", profile);
+  app.use("/dishes/", dishes);
+  app.use("/favorite/", favorite);
   app.use((req, res) => {
     res.status(404).send("This page does not exist!");
   }); // 404 error pages
