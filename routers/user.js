@@ -104,7 +104,6 @@ app.get("/overview", checkAuthenticated, async (req, res) => {
 
   // I have a cursor but I want my collection with all the dishes documents
   const allDishes = await dish.toArray();
-  // console.log(allDishes);
 
   res.render("pages/dishes", {
     // variables in the front-end

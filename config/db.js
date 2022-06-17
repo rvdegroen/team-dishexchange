@@ -14,7 +14,7 @@ const { MongoClient } = require("mongodb");
 		process.env.DB_NAME +
 		"?retryWrites=true&w=majority";
 
-        // new client mongodb
+// new client mongodb
 const client = new MongoClient(url);
 
   // Connect the client to url that"s saved in .env file

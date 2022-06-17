@@ -31,7 +31,6 @@ dishes.get("/add-dish", (req, res) => {
 // add-dish post into mongoDB
 dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
   // NEW
-  console.log(req.file);
   // using try & catch for things that could potentially throw an error
   try {
     const newDish = await dishesCollection.insertOne({
@@ -57,14 +56,13 @@ dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
 // dishId has the same Id as insertedId from line 79, because that's where you go redirected
 dishes.get("/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
-  console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
   // we need to convert the urlId from "string" to (a new variable) objectId
   // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
   const query = { _id: new ObjectId(urlId) };
   const dish = await dishesCollection.findOne(query);
   // making sure that when you click on a dish, it will console.log the dish
-  console.log("dish", dish);
+
 
   res.render("pages/dish-details", {
     // variables in the front-end
@@ -82,7 +80,7 @@ dishes.get("/edit/:dishId", async (req, res) => {
   const query = { _id: new ObjectId(urlId) };
   const dish = await dishesCollection.findOne(query);
   // making sure that when you click on a dish, it will console.log the dish
-  // console.log("dish", dish);
+
 
   res.render("pages/edit-dish", {
     // variables in the front-end
@@ -120,7 +118,7 @@ dishes.post("/edit/:dishId", upload.single("uploadImage"), async (req, res) => {
 
 dishes.delete("/delete/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
-  console.log("urlId", urlId);
+
   // a query will basically filter the information you're looking for
   // we need to convert the urlId from "string" to (a new variable) objectId
   // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console

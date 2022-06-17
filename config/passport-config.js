@@ -4,8 +4,6 @@ const connectDB = require("./db");
 
 connectDB();
 
-// console.log(appel)
-
 async function initialize(passport, getUserByEmail, getUserByID) {
 
   const authenticateUser = async (email, password, done) => {

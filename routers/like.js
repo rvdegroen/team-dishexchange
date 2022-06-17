@@ -14,7 +14,7 @@ favorite.get("/dishes", async (req, res) => {
     })
     .toArray();
 
-  console.log(myFavoriteDishes);
+
   res.render("pages/favo-dish", { myFavoriteDishes });
 });
 
@@ -28,7 +28,6 @@ favorite.post("/dishes", async (req, res) => {
     }
   );
 
-  console.log(myFavoriteDishes);
   res.redirect("/favorite/dishes");
 });
 
