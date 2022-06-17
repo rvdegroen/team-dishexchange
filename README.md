@@ -73,8 +73,10 @@ Now that you have your database set up, I'll explain in the following steps on h
 15. To connect your mongoDB cluster, go to your mongoDB cluster, click on `database` (on the left) and click on `connect`
 16. Because we're using the Node.js driver to connect mongoDB, click on `connect your application`
 17. Make sure that `driver` is set to `Node.js`
-18. Copy the connection string (there's a copy button next to it) and add this connection string as a value of `DATABASE_URL` in your `.env` file of this repository
-19. replace `<password>` with the password of the user you created earlier (remember step 9)
+18. In the variable `DB_HOST: ` of the `.env` file, you copy whatever is written in the string from `cluster` (after the @) until `mongodb.net`. 
+19. In the variable `DB_NAME: ` of the `.env` file, you write the name of the collection, which is in this case `dish-exchange`. 
+20. In the variable `DB_USER: ` of the `.env` file, you write the name of the user you created in step 9. 
+21. In the variable `DB_PASS: ` of the `.env` file, you write the password of the user you created in step 9. 
 
 MongoDB should now be connected to this application!
 
