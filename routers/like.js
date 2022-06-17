@@ -1,10 +1,8 @@
 const express = require("express");
-const connectDB = require("../config/db");
+
 const { ObjectId } = require("mongodb");
 
 const favorite = express.Router();
-
-connectDB();
 
 // favorite dish page
 favorite.get("/dishes", async (req, res) => {

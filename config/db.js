@@ -1,21 +1,20 @@
 const { MongoClient } = require("mongodb");
 
 // CONNECT DATABASE
- const connectDB = async () => {
+const connectDB = async () => {
+  const url =
+    "mongodb+srv://" +
+    process.env.DB_USER +
+    ":" +
+    process.env.DB_PASS +
+    "@" +
+    process.env.DB_HOST +
+    "/" +
+    process.env.DB_NAME +
+    "?retryWrites=true&w=majority";
 
-    const url = 
-		"mongodb+srv://" +
-		process.env.DB_USER +
-		":" +
-		process.env.DB_PASS +
-		"@" +
-		process.env.DB_HOST +
-		"/" +
-		process.env.DB_NAME +
-		"?retryWrites=true&w=majority";
-
-// new client mongodb
-const client = new MongoClient(url);
+  // new client mongodb
+  const client = new MongoClient(url);
 
   // Connect the client to url that"s saved in .env file
   await client.connect();
@@ -27,7 +26,6 @@ const client = new MongoClient(url);
   // Variable of dishes collection within dish-exchange
   dishesCollection = database.collection("dishes");
   userCollection = database.collection("users");
-}
-
+};
 
 module.exports = connectDB;

@@ -205,6 +205,11 @@ span a {
 
  #favorite button img {
   width: 2.3em;
+  cursor: pointer;
+} 
+
+#favorite button img:hover{
+transform: scale(.8);
 }
 
 /*****SPECIFIC FORM STYLING***/

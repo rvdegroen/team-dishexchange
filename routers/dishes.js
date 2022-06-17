@@ -1,16 +1,36 @@
 const express = require("express");
-
-const connectDB = require("../config/db");
+const session = require("express-session");
+const flash = require("express-flash");
 
 const { ObjectId } = require("mongodb");
 
 const dishes = express.Router();
 const multer = require("multer");
+const passport = require("passport");
+const initializePassport = require("../config/passport-config");
 // INCLUDED IN NODEJS
 const path = require("path");
 
+initializePassport(
+  passport,
+  (email) => user.find((user) => user.email === email),
+  (_id) => user.find((user) => user._id === _id)
+);
 
-connectDB();
+
+
+dishes.use(express.urlencoded({ extended: false }));
+dishes.use(flash());
+dishes.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // dont save if nothing in de session has change
+    saveUninitialized: false, // don't save an empty value
+  })
+);
+dishes.use(passport.initialize());
+dishes.use(passport.session());
+
 
 // MIDDLEWARE MULTER | source: https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer/39650303#39650303
 const storage = multer.diskStorage({
@@ -24,12 +44,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // add-dish page
-dishes.get("/add-dish", (req, res) => {
+dishes.get("/add-dish", checkNotAuthenticated, (req, res) => {
   res.render("pages/add-dish");
 });
 
 // add-dish post into mongoDB
 dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
+  
   // NEW
   // using try & catch for things that could potentially throw an error
   try {
@@ -40,6 +61,7 @@ dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
       tags: Array.isArray(req.body.tags) ? req.body.tags : [req.body.tags],
       // it doesn't comes back as undefined if it doesn't exist
       img: req?.file?.filename,
+      like: false,
     });
     // console log will return the insertedId
     // console.log("newDish", newDish);
@@ -134,5 +156,20 @@ dishes.delete("/delete/:dishId", async (req, res) => {
     res.status(400).send(err.message);
   }
 });
+
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/");
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/dishes/add-dish");
+  }
+  next();
+}
 
 module.exports = dishes;

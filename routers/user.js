@@ -1,25 +1,19 @@
 const express = require("express");
-const connectDB = require("../config/db");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const initializePassport = require("../config/passport-config");
-
+const { ObjectId } = require("mongodb");
 const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
+const initializePassport = require("../config/passport-config");
 
 const app = express.Router();
 
-connectDB();
-
 initializePassport(
   passport,
-  (email) => users.find((user) => user.email === email),
-  (id) => users.find((user) => user.id === id)
+  (email) => user.find((user) => user.email === email),
+  (_id) => user.find((user) => user._id === _id)
 );
-
-// let userCollection;
-const users = require("./usersDB");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
@@ -41,24 +35,9 @@ app.get("/register", (req, res) => {
 
 // INSERT USER
 app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
-  // try {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  // await userCollection.insertOne({
-  //   name: req.body.name,
-  //   country: req.body.country,
-  //   city: req.body.city,
-  //   phone: req.body.phonenumber,
-  //   dob: req.body.dob,
-  //   email: req.body.email,
-  //   username: req.body.username,
-  //   password: hashedPassword,
-  //   mydish: [],
-  // });
-
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    users.push({
-      id: Date.now().toString(),
+    await userCollection.insertOne({
       name: req.body.name,
       country: req.body.country,
       city: req.body.city,
@@ -90,7 +69,7 @@ app.post(
 );
 
 app.delete("/logout", (req, res) => {
-  req.logout(function (err) {
+  req.logout((err) => {
     if (err) {
       return next(err);
     }
@@ -99,17 +78,29 @@ app.delete("/logout", (req, res) => {
 });
 
 app.get("/overview", checkAuthenticated, async (req, res) => {
-  // I want to retrieve data from mongoDB with .find, which returns a cursor
-  const dish = await dishesCollection.find({}, {});
+  req.user.then(async (value) => {
+    // I want to retrieve data from mongoDB with .find, which returns a cursor
+    // const dish = await dishesCollection.find({}, {});
 
-  // I have a cursor but I want my collection with all the dishes documents
-  const allDishes = await dish.toArray();
+    const dishes = await userCollection.findOne({ _id: value._id }, {});
+    // console.log(dishes.mydish);
 
-  res.render("pages/dishes", {
-    // variables in the front-end
-    numberOfDishes: allDishes.length,
-    allDishes,
-    name: req.user.name,
+    if (dishes.mydish) {
+      const items = dishes.mydish.map((item) =>
+        dishesCollection.find({ _id: new ObjectId(item) }, {}).toArray()
+      );
+
+      Promise.all(items).then((data) => {
+        const myDishes = data.flat(); // squeeze multiple array
+
+        res.render("pages/dishes", {
+          // variables in the front-end
+          numberOfDishes: myDishes.length,
+          myDishes,
+          user: value,
+        });
+      });
+    }
   });
 });
 
