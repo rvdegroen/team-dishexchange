@@ -17,8 +17,6 @@ initializePassport(
   (_id) => user.find((user) => user._id === _id)
 );
 
-
-
 dishes.use(express.urlencoded({ extended: false }));
 dishes.use(flash());
 dishes.use(
@@ -30,7 +28,6 @@ dishes.use(
 );
 dishes.use(passport.initialize());
 dishes.use(passport.session());
-
 
 // MIDDLEWARE MULTER | source: https://stackoverflow.com/questions/31592726/how-to-store-a-file-with-file-extension-with-multer/39650303#39650303
 const storage = multer.diskStorage({
@@ -50,7 +47,6 @@ dishes.get("/add-dish", checkNotAuthenticated, (req, res) => {
 
 // add-dish post into mongoDB
 dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
-  
   // NEW
   // using try & catch for things that could potentially throw an error
   try {
@@ -85,7 +81,6 @@ dishes.get("/:dishId", async (req, res) => {
   const dish = await dishesCollection.findOne(query);
   // making sure that when you click on a dish, it will console.log the dish
 
-
   res.render("pages/dish-details", {
     // variables in the front-end
     dish,
@@ -102,7 +97,6 @@ dishes.get("/edit/:dishId", async (req, res) => {
   const query = { _id: new ObjectId(urlId) };
   const dish = await dishesCollection.findOne(query);
   // making sure that when you click on a dish, it will console.log the dish
-
 
   res.render("pages/edit-dish", {
     // variables in the front-end
@@ -140,13 +134,12 @@ dishes.post("/edit/:dishId", upload.single("uploadImage"), async (req, res) => {
 
 dishes.delete("/delete/:dishId", async (req, res) => {
   const urlId = req.params.dishId;
-
-  // a query will basically filter the information you're looking for
-  // we need to convert the urlId from "string" to (a new variable) objectId
-  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-  const query = { _id: urlId };
   // using try & catch for things that could potentially throw an error
   try {
+    // a query will basically filter the information you're looking for
+    // we need to convert the urlId from "string" to (a new variable) objectId
+    // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
+    const query = { _id: new ObjectId(urlId) };
     await dishesCollection.deleteOne(query);
     // if deleteOne sends the response of "OK" then the brower knows it can redirect
     res.send(`OK`);
@@ -156,7 +149,6 @@ dishes.delete("/delete/:dishId", async (req, res) => {
     res.status(400).send(err.message);
   }
 });
-
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
