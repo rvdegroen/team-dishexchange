@@ -26,6 +26,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+
 // GLOBAL VARIABLES DATABASE - AFTER CLIENT IS CONNECTED
 // Variable of the database dish-exchange
 let database;
