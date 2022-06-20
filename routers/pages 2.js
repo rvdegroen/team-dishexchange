@@ -6,8 +6,7 @@ const checkAuthenticated = require("../controller/authenticate");
 
 // HOME
 app.get("/", async (req, res) => {
-  try {
-  res.render("pages/home");
+  try { res.render("pages/home");
   console.log('Homepage error handling works');
   } catch(err) {
   console.log('Did not get homepage');
@@ -16,6 +15,7 @@ app.get("/", async (req, res) => {
 
 // DISHES ROUTES
 app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
+  
   const sessionUser = req.session.passport.user;
   console.log(sessionUser);
 
@@ -41,9 +41,9 @@ app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
 app.get("/add-dishes", checkAuthenticated, (req, res) => {
   try {
   res.render("pages/add-dish");
-  console.log('Add-dish page error handling works');
+  console.log('Add-dishes page error handling works');
   } catch(err) {
-  console.log('Did not get add-dish page');
+  console.log('Did not get add-dishes page');
   }
 });
 
@@ -99,6 +99,7 @@ app.get("/edit-dish/:dishId", checkAuthenticated, async (req, res) => {
 // USER ROUTES
 app.get("/register", (req, res) => {
   try {
+  res.status(error);
   res.render("pages/register");
   console.log('Register page error handling works');
   } catch(err) {
@@ -118,9 +119,9 @@ app.get("/profile", checkAuthenticated, (req, res) => {
 app.get("/login", (req, res) => {
   try {
   res.render("pages/login");
-  console.log('Loginpage error handling works');
+  console.log('Login page error handling works');
   } catch(err) {
-  console.log('Did not get loginpage');
+  console.log('Did not get login page');
   }
 });
 
