@@ -1,0 +1,15 @@
+@import 'helpers/variables';
+@import 'helpers/function';
+@import 'structure';
+@import 'nav';
+@import 'text';
+@import 'form';
+@import '404';
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    box-sizing: border-box;
+    color: color(text-color);
+}

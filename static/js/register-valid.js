@@ -76,7 +76,6 @@ form.submit.addEventListener("click", (e) => {
  
     registerd();
     console.log("ready to send to the database");
-    // submitForm();
   }
 });
 

@@ -1,0 +1,48 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  aside{
+    display: flex;
+    form{
+      margin-left: 1em;
+    }
+  }
+
+
+  a {
+    img {
+      width: 2.5em;
+    }
+
+    &:first-of-type {
+      img {
+        margin-right: 1.5em;
+      }
+    }
+  }
+}
+
+
+footer {
+  margin-top: 20px;
+  width: 100%;
+  padding: 1em;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  li {
+    display: block;
+    padding: 10px;
+    min-width: 48px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}

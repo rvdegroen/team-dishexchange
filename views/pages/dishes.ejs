@@ -1,13 +1,19 @@
 <%-include('../partials/header');%>
-
-<form action="/user/logout?_method=DELETE" method="POST">
+<nav class="icons">
+  <form action="/logout?_method=DELETE" method="POST">
     <button type="submit" id="logout" class="deleteButton">Log out</button>
-</form>
-    <h1>Hi <%= name %> Your Menu</h1>
-    <h2><%= numberOfDishes %> dishes</h2>
-    <!--I want to include the partial dish, x (numderOfDishes) times into this page-->
-    <%-include('../partials/dish') %>
-    <!--for loop for oneofthedishes-->
-    <a href="/dishes/add-dish" class="floatingActionButton">+</a>
+  </form>
+  <aside>
+    <a href="/favorite-dishes"><img src="/images/img/like.png" alt="Favorite dishes Icon" /></a>
+    <a href="/profile"><img src="/images/img/user.png" alt="User Icon" /></a>
+  </aside>
+</nav>
+
+<h1>Hi <%= user.name %> Your Menu</h1>
+<h2><%= numberOfDishes %> dishes</h2>
+
+<div class="dish-frame"><%-include('../partials/dish') %></div>
+
+<a href="/add-dishes" class="floatingActionButton">+</a>
 
 <%-include('../partials/footer');%>

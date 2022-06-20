@@ -1,16 +1,34 @@
-<!--This is a template for a dish, displayed on the dishes.ejs page-->
-<!--for every dish in allDishes, I want to loop and I do this with arrayNumber, which is a number-->
-<% for (let arrayNumber = 0; arrayNumber < allDishes.length; arrayNumber++) { %>
-<a href="/dishes/<%=allDishes[arrayNumber]._id%>">
+<% for (let arrayNumber=0; arrayNumber < myDishes.length; arrayNumber++) { %>
+<a href="/dish/<%=myDishes[arrayNumber]._id%>">
   <article>
-    <div class="dishText">
-      <h3><%=allDishes[arrayNumber].name %></h3>
-      <p><%=allDishes[arrayNumber].tags %></p>
-      <p class="qualityText">Quality: <%=allDishes[arrayNumber].quality %></p>
-    </div>
+    <div>
+      <div class="dishText">
+        
+          <% if(myDishes[arrayNumber].like==true){ %>
+        <form action="/favorite/dislike" method="post">
+            <button name="dislike" type="submit" value="<%= myDishes[arrayNumber]._id %>">
+              <img src="/images/img/like.png" alt="like Button">
+            </button>
+          </form>
+
+            <% } else{ %>
+        <form action="/favorite/like" method="post">
+              <button name="like" type="submit" value="<%= myDishes[arrayNumber]._id %>">
+                <img src="/images/img/unlike.png" alt="Dislike Button">
+              </button>
+          </form>
+          <%} %>
+     
+
+        <h3><%=myDishes[arrayNumber].name %></h3>
+        <p><%=myDishes[arrayNumber].tags %></p>
+        <p class="qualityText">Quality: <%=myDishes[arrayNumber].quality %></p>
+      </div>
+
     <div class="dishImage">
-      <img src="/images/uploads/<%= allDishes[arrayNumber].img %>" alt="" />
+      <img src="/images/uploads/<%= myDishes[arrayNumber].img %>" alt="" />
     </div>
   </article>
 </a>
-<% } %>
+
+    <% } %>

@@ -1,14 +1,9 @@
 const express = require("express");
-const connectDB = require("../config/db");
 
-const profile = express.Router();
+const app = express.Router();
+const user = require("../controller/user");
 
-connectDB();
+app.post("/edit", user.edit); 
+app.delete("/delete", user.deleteOne); 
 
-
-// Profile VOORDBEELD
-profile.get("/", (req, res) => {
-  res.render("pages/register");
-});
-
-module.exports = profile;
+module.exports = app;

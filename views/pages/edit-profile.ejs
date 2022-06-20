@@ -1,0 +1,35 @@
+<%-include('../partials/header');%>
+
+<form id="form" action="/profile/edit" method="POST">
+  <input type="hidden" value="<%= user._id %>" name="userId" />
+  <h1> <%-include('../partials/back')%> My profile</h1>
+  
+  <fieldset>
+    <h2>Account</h2>
+    <label>Name</label>
+    <input value="<%= user.name %>" type="text" id="name" name="name" />
+    <label>Username</label>
+    <input value="<%= user.username %>" type="text" id="username" name="username" />
+    <label>Email</label>
+    <input value="<%= user.email %>" type="email" id="email" name="email" />
+    <label>Phone number</label>
+    <input value="<%= user.phone %>" type="number" id="phone" name="phone" />
+
+    <label>Password</label>
+    <button class="btn">Change password</button>
+  </fieldset>
+
+  <fieldset>
+    <h2>Personal information</h2> 
+    <label>Country</label>
+    <input value="<%= user.country %>" type="text" id="country" name="country" />
+    <label>City</label>
+    <input value="<%= user.city %>" type="text" id="city" name="city" />
+    <label>Date of Birth</label>
+    <input value="<%= user.dob %>" type="date" id="dob" name="dob" />
+
+    <input class="btn" type="submit" value="Submit" />
+  </fieldset>
+</form>
+
+<%-include('../partials/footer');%>
