@@ -77,6 +77,9 @@ Now that you have your database set up, I'll explain in the following steps on h
 19. In the variable `DB_NAME: ` of the `.env` file, you write the name of the collection, which is in this case `dish-exchange`. 
 20. In the variable `DB_USER: ` of the `.env` file, you write the name of the user you created in step 9. 
 21. In the variable `DB_PASS: ` of the `.env` file, you write the password of the user you created in step 9. 
+22. In the variable `SESSION_SECRET:` of the .env file, you write a random password for your session.
+
+The session secret is a key used for signing and/or encrypting cookies set by the application to maintain session state. In practice, this is often what prevents users from pretending to be someone they're not ensuring that random person on the internet cannot access your application as an administrator.
 
 MongoDB should now be connected to this application!
 
@@ -84,11 +87,11 @@ MongoDB should now be connected to this application!
 
 To be able to use Spoonacular, you will need an API key. I'm only using spoonacular as a progressive enhancement, so that as a user you can make a picture of a dish and Spoonacular will try to "guess" the name of the dish and add this "guess" as name in the form, so you won't have to type the name of the dish yourself.
 
-20. Create a Spoonacular account on: "https://spoonacular.com/food-api/docs/detect-foods-in-text" (it's free!)
-21. Go to your Spoonacular profile (on the left, below API Console)
-22. Click on `show / hide API key` to show your API key
-23. Copy your API key
-24. Paste your API key as the value of the variable `API_KEY` in your `.env` file
+23. Create a Spoonacular account on: "https://spoonacular.com/food-api/docs/detect-foods-in-text" (it's free!)
+24. Go to your Spoonacular profile (on the left, below API Console)
+25. Click on `show / hide API key` to show your API key
+26. Copy your API key
+27. Paste your API key as the value of the variable `API_KEY` in your `.env` file
 
 Now you should have everything you need and you're ready to go!
 test
