@@ -77,7 +77,9 @@ Now that you have your database set up, I'll explain in the following steps on h
 19. In the variable `DB_NAME: ` of the `.env` file, you write the name of the collection, which is in this case `dish-exchange`. 
 20. In the variable `DB_USER: ` of the `.env` file, you write the name of the user you created in step 9. 
 21. In the variable `DB_PASS: ` of the `.env` file, you write the password of the user you created in step 9. 
+22. In the variable `SESSION_SECRET: ` of the `.env` file, you write a random password for your session. 
 
+The session secret is a key used for signing and/or encrypting cookies set by the application to maintain session state. In practice, this is often what prevents users from pretending to be someone they're not ensuring that random person on the internet cannot access your application as an administrator
 MongoDB should now be connected to this application!
 
 ### Spoonacular
