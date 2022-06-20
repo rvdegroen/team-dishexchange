@@ -58,6 +58,16 @@ app.get("/dish/:dishId", checkAuthenticated, async (req, res) => {
   }
 });
 
+// dish details edit page
+app.get("/edit-dish/:dishId", async (req, res) => {
+  const query = { _id: new ObjectId(req.params.dishId) };
+  const dish = await dishesCollection.findOne(query);
+
+  res.render("pages/edit-dish", {
+    dish,
+  });
+});
+
 app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
   const sessionUser = req.session.passport.user;
 

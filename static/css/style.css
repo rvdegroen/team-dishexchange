@@ -60,6 +60,8 @@ body {
 
 .editButtons {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .floatingActionButton {
