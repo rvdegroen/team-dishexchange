@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { ObjectId } = require("mongodb");
 
 // INSERT USER
 const register = async (req, res) => {
@@ -21,4 +22,39 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = {register};
+// EDIT USER
+const edit = async (req, res) => {
+  await userCollection.updateOne(
+    { _id: ObjectId(req.body.userId) },
+    {
+      $set: {
+        _id: ObjectId(req.body.userId),
+        country: req.body.country,
+        city: req.body.city,
+        phone: req.body.phone,
+        dob: req.body.dob,
+        email: req.body.email,
+        username: req.body.username,
+        name: req.body.name,
+      },
+    }
+  );
+
+  res.redirect("/profile");
+};
+
+// DELETE USER
+const deleteOne = async (req, res) => {
+  try {
+    const sessionUser = req.session.passport.user;
+    const query = { _id: new ObjectId(sessionUser) };
+    await userCollection.deleteOne(query);
+
+    res.redirect("/login");
+    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+module.exports = { register, edit, deleteOne };

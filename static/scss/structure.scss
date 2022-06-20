@@ -20,6 +20,10 @@ body {
   border-radius: 5px;
   color: color(tertiary);
   background-color: color(primary);
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .primaryButton {
@@ -33,12 +37,15 @@ body {
   display: block;
   text-align: center;
   margin: 1em 0;
-  width: 60%;
   padding: 0.9em;
   border-radius: 3px;
   background-color: color(delete-color);
   border: none;
   color: color(quaternary);
+
+  &:hover{
+        opacity: 0.5;
+  }
 }
 
 #logout {
@@ -88,6 +95,11 @@ body {
   }
 }
 
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
 .dish-frame {
   article {
     background-color: color(quaternary);

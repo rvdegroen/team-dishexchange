@@ -22,6 +22,9 @@ body {
   color: #f3f3f3;
   background-color: #41c1a5;
 }
+.btn:hover {
+  opacity: 0.5;
+}
 
 .primaryButton {
   display: block;
@@ -34,12 +37,14 @@ body {
   display: block;
   text-align: center;
   margin: 1em 0;
-  width: 60%;
   padding: 0.9em;
   border-radius: 3px;
   background-color: #ed6f6f;
   border: none;
   color: #ffffff;
+}
+.deleteButton:hover {
+  opacity: 0.5;
 }
 
 #logout {
@@ -83,6 +88,12 @@ body {
 }
 .backButton:active {
   color: #4f4f4f;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
 }
 
 .dish-frame article {
@@ -145,6 +156,25 @@ body {
   margin-bottom: 20px;
   border-radius: 5px;
   object-fit: cover;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+nav aside {
+  display: flex;
+  gap: 2em;
+}
+nav.profile {
+  justify-content: space-between;
+}
+nav a img {
+  width: 2.5em;
+}
+nav a:first-of-type img {
+  margin-right: 1.5em;
 }
 
 footer {
@@ -241,7 +271,8 @@ form fieldset {
   display: flex;
   flex-direction: column;
 }
-form fieldset legend {
+form fieldset legend,
+form fieldset label {
   padding-bottom: 10px;
   font-weight: bold;
   color: #4f4f4f;
@@ -331,15 +362,6 @@ form span a {
 .form-respond p:last-of-type {
   line-height: 20px;
   margin-bottom: 20px;
-}
-
-#favoritesButton {
-  background-color: transparent;
-  border: none;
-  margin-left: 97%;
-}
-#favoritesButton img {
-  width: 2.5em;
 }
 
 * {
