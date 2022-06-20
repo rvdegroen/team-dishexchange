@@ -1,3 +1,30 @@
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  aside{
+    display: flex;
+    gap: 2em;
+  }
+  &.profile {
+    justify-content: space-between;
+  }
+
+  a {
+    img {
+      width: 2.5em;
+    }
+
+    &:first-of-type {
+      img {
+        margin-right: 1.5em;
+      }
+    }
+  }
+}
+
+
 footer {
   margin-top: 20px;
   width: 100%;

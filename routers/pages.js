@@ -12,7 +12,6 @@ app.get("/", async (req, res) => {
 // DISHES ROUTES
 app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
   const sessionUser = req.session.passport.user;
-  console.log(sessionUser);
 
   const user = await userCollection.findOne({ _id: ObjectId(sessionUser) }, {});
   if (user.mydish) {
@@ -76,8 +75,19 @@ app.get("/register", (req, res) => {
   res.render("pages/register");
 });
 
-app.get("/profile", checkAuthenticated, (req, res) => {
-  res.render("pages/register");
+app.get("/profile", checkAuthenticated, async (req, res) => {
+  const sessionUser = req.session.passport.user;
+  const query = { _id: ObjectId(sessionUser) };
+  const user = await userCollection.findOne(query);
+  res.render("pages/userprofile", { user});
+});
+
+app.get("/edit-profile", async (req, res) => {
+  const sessionUser = req.session.passport.user;
+  const query = { _id: ObjectId(sessionUser) };
+  const user = await userCollection.findOne(query);
+
+  res.render("pages/edit-profile", { user });
 });
 
 app.get("/login", (req, res) => {

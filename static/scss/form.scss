@@ -45,12 +45,15 @@ form {
     display: flex;
     flex-direction: column;
 
-    legend {
+    legend,
+    label {
       padding-bottom: 10px;
       font-weight: bold;
       color: color(text-color);
       padding-top: 20px;
+    }
 
+    legend {
       &::after {
         content: "*";
         margin-left: 5px;
@@ -152,15 +155,3 @@ form {
     margin-bottom: 20px;
   }
 }
-
-#favoritesButton {
-  background-color: transparent;
-  border: none;
-  margin-left: 97%;
-
-  img {
-    width: 2.5em;
-  }
-}
-
-

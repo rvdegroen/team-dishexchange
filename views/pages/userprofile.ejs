@@ -1,46 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/css/styles.css" rel="stylesheet" />
-    <title>My profile - <%= user.name %></title>
-  </head>
-  <body>
-    <div class="body--class">
-    <div class="user"></div>
-      <h1>My profile</h1>
-      <a href="/profile/<%= user._id %>/edit">Edit</a>
-      <h2><%= user.name %></h2>
-      <p>Member since: 23-04-2022</p>
-    </div>
-  
-    <div class="account">
-      <h3>Account</h3>
-      <h4>Username</h4>
-      <h5><%= user.username %></h5>
-      <h4>Email</h4>
-      <h5><%= user.email %></h5>
-      <h4>Phone number</h4>
-      <h5><%= user.phone %></h5>
-    </div>
+<%-include('../partials/header');%>
 
-    <div class="password">
-      <h3>Password</h3>
-      <button class="btn--password">Change password</button>
-    </div>
+<div class="user"></div>
+<nav class="profile">
+  <h1><%-include('../partials/back')%> My profile</h1>
+  <aside>
+    <a href="/edit-profile" class="btn edit">Edit</a>
+    <form action="/profile/delete?_method=DELETE" method="POST">
+      <button type="submit" class="deleteButton">Delete profile</button>
+    </form>
+  </aside>
+</nav>
 
-    <div class="information">
-      <h3>Personal information</h3>
-      <h4>Country</h4>
-      <h5><%= user.country %></h5>
-      <h4>City</h4>
-      <h5><%= user.city %></h5>
-      <h4>Date of Birth</h4>
-      <h5><%= user.dob %></h5>
-    </div>
-    
-  </div> 
-  </body>
-</html>
+<div class="profile-info">
+  <section>
+    <h3>Name</h3>
+    <p><%= user.name %></p>
+    <h2>Account</h2>
+    <h3>Username</h3>
+    <p><%= user.username %></p>
+    <h3>Email</h3>
+    <p><%= user.email %></p>
+    <h3>Phone number</h3>
+    <p><%= user.phone %></p>
+
+    <h3>Password</h3>
+    <button class="btn">Change password</button>
+  </section>
+
+  <section>
+    <h2>Personal information</h2>
+    <h3>Country</h3>
+    <p><%= user.country %></p>
+    <h3>City</h3>
+    <p><%= user.city %></p>
+    <h3>Date of Birth</h3>
+    <p><%= user.dob %></p>
+  </section>
+</div>
+
+<%-include('../partials/footer');%>
