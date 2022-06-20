@@ -12,22 +12,26 @@
     <h2><%=dish.name%></h2>
     <p class="qualityText">Quality: <%=dish.quality%></p>
     <h3 class="dishDetails">Ingredients</h3>
-    <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
+
     <ul>
       <% for (let ingredient of dish.ingredients) { %>
       <li><%= ingredient %></li>
       <% } %>
     </ul>
+
     <h3 class="dishDetails">Tags</h3>
-    <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
+
     <ul>
       <% for (let tag of dish.tags) { %>
       <li><%= tag %></li>
       <% } %>
     </ul>
+    
     <div class="editButtons">
       <a href="/edit-dish/<%=dish._id%>" class="primaryButton">Edit</a>
-      <a onclick="deleteDish('<%=dish._id%>')" class="deleteButton">Delete</a>
+      <form action="/dishes/delete?_method=DELETE" method="POST">
+        <button type="submit" name="delete" class="deleteButton" value="<%=dish._id%>">Delete</button>
+      </form>
     </div>
 
     <%-include('../partials/footer');%>

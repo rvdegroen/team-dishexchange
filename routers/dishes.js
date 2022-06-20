@@ -77,12 +77,12 @@ dishes.post("/edit-dish/:dishId", upload.single("uploadImage"), async (req, res)
   }
 });
 
-dishes.delete("/delete/:dishId", async (req, res) => {
+dishes.delete("/delete", async (req, res) => {
   try {
-    const query = { _id: new ObjectId(req.params.dishId) };
+    const query = { _id: new ObjectId(req.body.delete) };
     await dishesCollection.deleteOne(query);
-    // if deleteOne sends the response of "OK" then the brower knows it can redirect
-    res.send(`OK`);
+
+    res.redirect("/dishes-overview")
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.status(400).send(err.message);
