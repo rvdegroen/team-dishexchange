@@ -1,0 +1,21 @@
+footer {
+  margin-top: 20px;
+  width: 100%;
+  padding: 1em;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  li {
+    display: block;
+    padding: 10px;
+    min-width: 48px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
