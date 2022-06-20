@@ -4,20 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
     <title>My profile - <%= user.name %></title>
   </head>
   <body>
- 
+ <form id="form" action="" method="POST">
+  <input type="hidden" value="<%= user._id %>" name="userId">
     <div class="body--class">
     <div class="user"></div>
       <h1>My profile</h1>
-      <h2><%= user.name %></h2>
+      <h2><input value="<%= user.name %>" type="text" id="name" name="name"></h2>
       <p>Member since: 23-04-2022</p>
     </div>
   
-<form id="form" action="" method="POST">
-  <input type="hidden" value="<%= user._id %>" name="userId">
+
     <div class="account">
       <h3>Account</h3>
       <h4>Username</h4>

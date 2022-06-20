@@ -9,7 +9,7 @@ app.get("/:userId/", async (req, res) => {
   const user = await userCollection.findOne(query);
 
   console.log(" get /users/:userId/:username ", user);
-  res.render("userprofile.ejs", { user });
+  res.render("pages/userprofile", { user });
 });
 
 app.get("/:userId/edit", async (req, res) => {
@@ -22,7 +22,7 @@ app.get("/:userId/edit", async (req, res) => {
   );
   console.log(" get /users/:userId/:username/edit query ", query);
   console.log(" get /users/:userId/:username/edit user", user);
-  res.render("edituserprofile.ejs", { user });
+  res.render("pages/edituserprofile", { user });
 });
 
 app.post("/:userId/edit", async (req, res) => {
@@ -43,12 +43,13 @@ app.post("/:userId/edit", async (req, res) => {
         dob: req.body.dob,
         email: req.body.email,
         username: req.body.username,
+        name: req.body.name,
       },
     }
   );
 
   console.log(" post /users/:userId/:username/edit user", user);
-  res.render("userprofile.ejs", { user: req.body });
+  res.render("pages/userprofile", { user: req.body });
 });
 
 
