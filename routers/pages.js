@@ -12,6 +12,30 @@ app.get("/", async (req, res) => {
 });
 
 // DISHES ROUTES
+app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
+  const sessionUser = req.session.passport.user;
+  console.log(sessionUser);
+
+  const user = await userCollection.findOne({ _id: ObjectId(sessionUser) }, {});
+  if (user.mydish) {
+    const items = user.mydish.map((item) =>
+      dishesCollection.find({ _id: new ObjectId(item) }, {}).toArray()
+    );
+
+    Promise.all(items).then((data) => {
+      const myDishes = data.flat(); // squeeze multiple array
+
+      res.render("pages/dishes", {
+        // variables in the front-end
+        numberOfDishes: myDishes.length,
+        myDishes,
+        user,
+      });
+    });
+  }
+});
+
+
 app.get("/add-dishes", checkAuthenticated, (req, res) => {
   res.render("pages/add-dish");
 });
@@ -29,7 +53,7 @@ app.get("/dish/:dishId", checkAuthenticated, async (req, res) => {
   });
 });
 
-app.get("/favorite", checkAuthenticated, async (req, res) => {
+app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
   const myDishes = await dishesCollection
     .find({
       like: true,

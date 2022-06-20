@@ -1,34 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const { ObjectId } = require("mongodb");
-const flash = require("express-flash");
-const session = require("express-session");
-const methodOverride = require("method-override");
-const initializePassport = require("../config/passport-config");
 
 const app = express.Router();
-
-initializePassport(
-  passport,
-  (email) => user.find((user) => user.email === email),
-  (_id) => user.find((user) => user._id === _id)
-);
-
-app.use(express.urlencoded({ extended: false }));
-app.use(flash());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false, // dont save if nothing in de session has change
-    saveUninitialized: false, // don't save an empty value
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(methodOverride("_method"));
-
-
 
 // INSERT USER
 app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
@@ -54,51 +28,16 @@ app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
 app.post(
   "/loginForm",
   passport.authenticate("local", {
-    successRedirect: "/user/overview",
-    failureRedirect: "/user/login",
+    successRedirect: "/dishes-overview",
+    failureRedirect: "/login",
     failureFlash: true,
   })
 );
 
 
-
-app.get("/overview", checkAuthenticated, async (req, res) => {
-  req.user.then(async (value) => {
-    // I want to retrieve data from mongoDB with .find, which returns a cursor
-    // const dish = await dishesCollection.find({}, {});
-
-    const dishes = await userCollection.findOne({ _id: value._id }, {});
-    // console.log(dishes.mydish);
-
-    if (dishes.mydish) {
-      const items = dishes.mydish.map((item) =>
-        dishesCollection.find({ _id: new ObjectId(item) }, {}).toArray()
-      );
-
-      Promise.all(items).then((data) => {
-        const myDishes = data.flat(); // squeeze multiple array
-
-        res.render("pages/dishes", {
-          // variables in the front-end
-          numberOfDishes: myDishes.length,
-          myDishes,
-          user: value,
-        });
-      });
-    }
-  });
-});
-
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/");
-}
-
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.redirect("/user/overview");
+    return res.redirect("/dishes-overview");
   }
   next();
 }

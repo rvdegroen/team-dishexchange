@@ -4,10 +4,8 @@ const { ObjectId } = require("mongodb");
 
 const favorite = express.Router();
 
-
-
-favorite.post("/dishes", async (req, res) => {
-  const myFavoriteDishes = await dishesCollection.updateOne(
+favorite.post("/like", async (req, res) => {
+  await dishesCollection.updateOne(
     {
       _id: ObjectId(req.body.like),
     },
@@ -15,8 +13,20 @@ favorite.post("/dishes", async (req, res) => {
       $set: { like: true },
     }
   );
+  res.redirect("/favorite-dishes");
+});
 
-  res.redirect("/favorite/dishes");
+favorite.post("/dislike", async (req, res) => {
+  await dishesCollection.updateOne(
+    {
+      _id: ObjectId(req.body.dislike),
+    },
+    {
+      $set: { like: false },
+    }
+  );
+
+  res.redirect("/dishes-overview");
 });
 
 module.exports = favorite;

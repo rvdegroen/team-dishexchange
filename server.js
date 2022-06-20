@@ -3,15 +3,20 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // REQUIRE VARIABLES
-const connectDB = require("./config/db");
 const express = require("express");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const connectDB = require("./config/db");
+const initializePassport = require("./config/passport-config");
 
-// const passport = require("passport");
+initializePassport(
+  passport,
+  (email) => user.find((user) => user.email === email),
+  (_id) => user.find((user) => user._id === _id)
+);
 
 // VARIABLES
 const app = express();

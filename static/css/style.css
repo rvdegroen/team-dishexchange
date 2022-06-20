@@ -85,7 +85,7 @@ body {
   color: #4f4f4f;
 }
 
-.dish-frame {
+.dish-frame article {
   background-color: #ffffff;
   display: grid;
   border-radius: 0.3em;
@@ -119,6 +119,19 @@ body {
   border-radius: 0.3em 0 0 0.3em;
   height: 100%;
   object-fit: cover;
+}
+.dish-frame form button {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
+.dish-frame form button img {
+  width: 2.3em;
+  cursor: pointer;
+}
+.dish-frame form button img:hover {
+  transform: scale(0.8);
 }
 
 .qualityText {
@@ -327,20 +340,6 @@ form span a {
 }
 #favoritesButton img {
   width: 2.5em;
-}
-
-#favorite button {
-  color: transparent;
-  background-color: transparent;
-  border: none;
-  display: flex;
-}
-#favorite button img {
-  width: 2.3em;
-  cursor: pointer;
-}
-#favorite button img:hover {
-  transform: scale(0.8);
 }
 
 * {

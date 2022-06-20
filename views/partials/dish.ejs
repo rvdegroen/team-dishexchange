@@ -1,23 +1,24 @@
 <% for (let arrayNumber=0; arrayNumber < myDishes.length; arrayNumber++) { %>
 <a href="/dish/<%=myDishes[arrayNumber]._id%>">
-  <article class="dish-frame">
+  <article>
     <div>
       <div class="dishText">
-        <form action="/favorite/dishes" id="favorite" method="post">
+        
           <% if(myDishes[arrayNumber].like==true){ %>
-        
-            <button name="like" type="submit" value="<%= myDishes[arrayNumber]._id %>">
-              <img src="/images/img/like.png" id="emptyHeart" alt="likeButton">
+        <form action="/favorite/dislike" method="post">
+            <button name="dislike" type="submit" value="<%= myDishes[arrayNumber]._id %>">
+              <img src="/images/img/like.png" alt="like Button">
             </button>
-        
+          </form>
+
             <% } else{ %>
-        
+        <form action="/favorite/like" method="post">
               <button name="like" type="submit" value="<%= myDishes[arrayNumber]._id %>">
-                <img src="/images/img/unlike.png" id="emptyHeart" alt="likeButton">
+                <img src="/images/img/unlike.png" alt="Dislike Button">
               </button>
-        
+          </form>
           <%} %>
-        </form>
+     
 
         <h3><%=myDishes[arrayNumber].name %></h3>
         <p><%=myDishes[arrayNumber].tags %></p>

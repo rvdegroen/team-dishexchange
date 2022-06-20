@@ -1,13 +1,11 @@
 const express = require("express");
-const session = require("express-session");
-const flash = require("express-flash");
-
 const { ObjectId } = require("mongodb");
 
 const dishes = express.Router();
 const multer = require("multer");
 const passport = require("passport");
 const initializePassport = require("../config/passport-config");
+
 // INCLUDED IN NODEJS
 const path = require("path");
 
@@ -17,15 +15,6 @@ initializePassport(
   (_id) => user.find((user) => user._id === _id)
 );
 
-dishes.use(express.urlencoded({ extended: false }));
-dishes.use(flash());
-dishes.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false, // dont save if nothing in de session has change
-    saveUninitialized: false, // don't save an empty value
-  })
-);
 dishes.use(passport.initialize());
 dishes.use(passport.session());
 
@@ -40,12 +29,10 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-
 // add-dish post into mongoDB
 dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
-  // NEW
-  console.log("appel")
-  // using try & catch for things that could potentially throw an error
+  const sessionUser = req.session.passport.user;
+
   try {
     const newDish = await dishesCollection.insertOne({
       name: req.body.dishName,
@@ -56,26 +43,23 @@ dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
       img: req?.file?.filename,
       like: false,
     });
-    // console log will return the insertedId
-    console.log("newDish", newDish);
+
     const insertedId = newDish.insertedId;
-    // using ``, because then I can use the ${} to insert variables (template literals)
+    console.log(insertedId);
+    await userCollection.updateOne(
+      { _id: ObjectId(sessionUser) },
+      { $push: { mydish: insertedId } }
+    );
     res.redirect(`/dish/${insertedId}`);
-    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.render("/add-dishes", { error: err.message });
   }
 });
 
 dishes.post("/edit-dish/:dishId", upload.single("uploadImage"), async (req, res) => {
-  const urlId = req.params.dishId;
-  console.log("urlId", urlId);
-  // a query will basically filter the information you're looking for
-  // we need to convert the urlId from "string" to (a new variable) objectId
-  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-  const query = { _id: new ObjectId(urlId) };
+  const query = { _id: new ObjectId(req.params.dishId) };
   const dish = await dishesCollection.findOne(query);
-  // using try & catch for things that could potentially throw an error
+
   try {
     await dishesCollection.updateOne(query, {
       $set: {
@@ -87,33 +71,23 @@ dishes.post("/edit-dish/:dishId", upload.single("uploadImage"), async (req, res)
         img: req?.file?.filename,
       },
     });
-    // using ``, because then I can use the ${} to insert variables (template literals)
-    res.redirect(`/dish/${urlId}`);
-    // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
+    res.redirect(`/dish/${req.params.dishId}`);
   } catch (err) {
     res.render("pages/edit-dish", { error: err.message, dish });
   }
 });
 
 dishes.delete("/delete/:dishId", async (req, res) => {
-  const urlId = req.params.dishId;
-  // using try & catch for things that could potentially throw an error
   try {
-    // a query will basically filter the information you're looking for
-    // we need to convert the urlId from "string" to (a new variable) objectId
-    // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-    const query = { _id: new ObjectId(urlId) };
+    const query = { _id: new ObjectId(req.params.dishId) };
     await dishesCollection.deleteOne(query);
     // if deleteOne sends the response of "OK" then the brower knows it can redirect
     res.send(`OK`);
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
-    // res.render("pages/edit-dish", { error: err.message, dish });
     res.status(400).send(err.message);
   }
 });
-
-
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
