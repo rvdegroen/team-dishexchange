@@ -6,7 +6,11 @@ const checkAuthenticated = require("../controller/authenticate");
 
 // HOME
 app.get("/", async (req, res) => {
-  res.render("pages/home");
+  try {
+    res.render("pages/home");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 // DISHES ROUTES
@@ -32,18 +36,26 @@ app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
 });
 
 app.get("/add-dishes", checkAuthenticated, (req, res) => {
-  res.render("pages/add-dish");
+  try {
+    res.render("pages/add-dish");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 // dish-details page
 app.get("/dish/:dishId", checkAuthenticated, async (req, res) => {
-  const urlId = req.params.dishId;
-  const query = { _id: new ObjectId(urlId) };
-  const dish = await dishesCollection.findOne(query);
+  try {
+    const urlId = req.params.dishId;
+    const query = { _id: new ObjectId(urlId) };
+    const dish = await dishesCollection.findOne(query);
 
-  res.render("pages/dish-details", {
-    dish,
-  });
+    res.render("pages/dish-details", {
+      dish,
+    });
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
@@ -67,7 +79,11 @@ app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
 
 // USER ROUTES
 app.get("/register", (req, res) => {
-  res.render("pages/register");
+  try {
+    res.render("pages/register");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 app.get("/profile", checkAuthenticated, async (req, res) => {
@@ -86,7 +102,11 @@ app.get("/edit-profile", async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("pages/login");
+  try {
+    res.render("pages/login");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 app.delete("/logout", (req, res) => {
