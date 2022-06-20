@@ -9,10 +9,10 @@ const session = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const connectDB = require("./config/db");
-const helmet = require("helmet");
-const initializePassport = require("./config/passport-config");
 const compression = require("compression");
+const helmet = require("helmet");
+const connectDB = require("./config/db");
+const initializePassport = require("./config/passport-config");
 
 initializePassport(
   passport,
