@@ -40,14 +40,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// add-dish page
-dishes.get("/add-dish", checkNotAuthenticated, (req, res) => {
-  res.render("pages/add-dish");
-});
 
 // add-dish post into mongoDB
 dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
   // NEW
+  console.log("appel")
   // using try & catch for things that could potentially throw an error
   try {
     const newDish = await dishesCollection.insertOne({
@@ -60,51 +57,17 @@ dishes.post("/add-dish", upload.single("uploadImage"), async (req, res) => {
       like: false,
     });
     // console log will return the insertedId
-    // console.log("newDish", newDish);
+    console.log("newDish", newDish);
     const insertedId = newDish.insertedId;
     // using ``, because then I can use the ${} to insert variables (template literals)
-    res.redirect(`/dishes/${insertedId}`);
+    res.redirect(`/dish/${insertedId}`);
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
-    res.render("pages/add-dish", { error: err.message });
+    res.render("/add-dishes", { error: err.message });
   }
 });
 
-// dish-details page
-// dishId has the same Id as insertedId from line 79, because that's where you go redirected
-dishes.get("/:dishId", async (req, res) => {
-  const urlId = req.params.dishId;
-  // a query will basically filter the information you're looking for
-  // we need to convert the urlId from "string" to (a new variable) objectId
-  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-  const query = { _id: new ObjectId(urlId) };
-  const dish = await dishesCollection.findOne(query);
-  // making sure that when you click on a dish, it will console.log the dish
-
-  res.render("pages/dish-details", {
-    // variables in the front-end
-    dish,
-  });
-});
-
-// dish details edit page
-dishes.get("/edit/:dishId", async (req, res) => {
-  const urlId = req.params.dishId;
-  console.log("urlId", urlId);
-  // a query will basically filter the information you're looking for
-  // we need to convert the urlId from "string" to (a new variable) objectId
-  // source: https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-  const query = { _id: new ObjectId(urlId) };
-  const dish = await dishesCollection.findOne(query);
-  // making sure that when you click on a dish, it will console.log the dish
-
-  res.render("pages/edit-dish", {
-    // variables in the front-end
-    dish,
-  });
-});
-
-dishes.post("/edit/:dishId", upload.single("uploadImage"), async (req, res) => {
+dishes.post("/edit-dish/:dishId", upload.single("uploadImage"), async (req, res) => {
   const urlId = req.params.dishId;
   console.log("urlId", urlId);
   // a query will basically filter the information you're looking for
@@ -125,7 +88,7 @@ dishes.post("/edit/:dishId", upload.single("uploadImage"), async (req, res) => {
       },
     });
     // using ``, because then I can use the ${} to insert variables (template literals)
-    res.redirect(`/dishes/${urlId}`);
+    res.redirect(`/dish/${urlId}`);
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.render("pages/edit-dish", { error: err.message, dish });
@@ -150,12 +113,7 @@ dishes.delete("/delete/:dishId", async (req, res) => {
   }
 });
 
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/");
-}
+
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

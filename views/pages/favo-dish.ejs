@@ -1,12 +1,9 @@
 
 <%-include('../partials/header');%>
-    <body>
         <main>
-            <h1>Your Favorite Dishes</h1>
+            <h1> <%-include('../partials/back') %> Your Favorite Dishes</h1>
 
-            <%- include('../partials/dish', {allDishes: myFavoriteDishes}); %>
+            <%- include('../partials/dish'); %>
 
         </main>
-    </body>
-
-</html>
+<%-include('../partials/footer');%>

@@ -27,11 +27,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
-// form pages
-// REGISTER
-app.get("/register", (req, res) => {
-  res.render("pages/register");
-});
+
+
 
 // INSERT USER
 app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
@@ -54,11 +51,6 @@ app.post("/registerForm", checkNotAuthenticated, async (req, res) => {
   }
 });
 
-// LOGIN
-app.get("/login", (req, res) => {
-  res.render("pages/login");
-});
-
 app.post(
   "/loginForm",
   passport.authenticate("local", {
@@ -68,14 +60,7 @@ app.post(
   })
 );
 
-app.delete("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-});
+
 
 app.get("/overview", checkAuthenticated, async (req, res) => {
   req.user.then(async (value) => {

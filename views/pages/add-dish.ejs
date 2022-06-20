@@ -6,7 +6,7 @@
     <p class="error"><%= error %></p>
     <% } %>
     <!--for the action, I want to send you to the dish-details.ejs page + the id of the dish you just created-->
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/dishes/add-dish" method="post" enctype="multipart/form-data">
       <!--uploading an image using multer-->
       <fieldset>
         <input type="file" name="uploadImage" accept="image/*" />
@@ -17,25 +17,25 @@
         <input type="text" id="dishName" name="dishName" required />
         <button id="autodetectFoodButton" class="hidden">Autodetect dish</button>
         <!-- this is NOT inline styling, determines the size of the screenshot-->
-        <video id="video" width="320" height="240" class="hidden" autoplay></video>
-        <canvas id="canvas" width="320" height="240" class="hidden"></canvas>
+        <video width="320" height="240" class="hidden" autoplay></video>
+        <canvas width="320" height="240" class="hidden"></canvas>
       </fieldset>
 
       <fieldset>
         <legend>Dish quality</legend>
         <p class="subtext">How good are you at making this dish?</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality1" value="1" name="dishQuality" required />
           <label for="dishQuality1">1</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality2" value="2" name="dishQuality" required />
           <label for="dishQuality2">2</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality3" value="3" name="dishQuality" required />
           <label for="dishQuality3">3</label>
         </div>
@@ -45,66 +45,63 @@
         <legend>Ingredients</legend>
         <p class="subtext">Measurements are not needed</p>
         <p class="subtext">Seperate different ingredients with a comma</p>
-        <!--if there is javascript, add a button to add an ingredient and add a textfield -> this will create an array of ingredients-->
-        <!--if there is no javascript, add a textfield and a p, stating you need to distinguish ingredients with a comma -> this will create an array of ingredients-->
+        
         <input type="text" name="ingredients" />
       </fieldset>
 
       <fieldset>
         <legend>Tags</legend>
         <p class="subtext">Tags are used for filtering preferences</p>
-        <!--if there is js, then add dropdowns with cuisine, dishtype, spicelevel, diet & allergies-->
-        <!--if there is no js, then dont have dropwdowns and just input field-->
         <p class="heading">Cuisine</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="european" value="European" name="tags" />
           <label for="european">European</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="middle-eastern" value="Middle Eastern" name="tags" />
           <label for="middle-eastern">Middle Eastern</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="african" value="African" name="tags" />
           <label for="african">African</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="asian" value="Asian" name="tags" />
           <label for="asian">Asian</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="north-american" value="North American" name="tags" />
           <label for="north-american">North American</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="south-american" value="South American" name="tags" />
           <label for="south-american">South American</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="other-cuisines" value="Other cuisines" name="tags" />
           <label for="other-cuisines">Other cuisines</label>
         </div>
 
         <p class="heading">Dish type</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="meat" value="Meat" name="tags" />
           <label for="meat">Meat</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="fish" value="Fish" name="tags" />
           <label for="fish">Fish</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="shellfish-and-seafood"
@@ -114,7 +111,7 @@
           <label for="shellfish-and-seafood">Shellfish and seafood</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="vegetables-and-sides"
@@ -124,47 +121,47 @@
           <label for="Vegetables and Sides">Vegetables and sides</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="pasta-and-noodles" value="Pasta and noodles" name="tags" />
           <label for="pasta-and-noodles">Pasta and noodles</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="pizza" value="Pizza" name="tags" />
           <label for="pizza">Pizza</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="burgers" value="Burgers" name="tags" />
           <label for="burgers">Burgers</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="stews-and-curries" value="Stews and curries" name="tags" />
           <label for="stews-and-curries">Stews and curries</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="sushi-and-poke" value="Sushi and poke" name="tags" />
           <label for="sushi-and-poke">Sushi and poke</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="kebab-and-skewers" value="Kebab and skewers" name="tags" />
           <label for="kebab-and-skewers">Kebab and skewers</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="soup-and-ramen" value="Soup and ramen" name="tags" />
           <label for="soup-and-ramen">Soup and ramen</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="salads" value="Salads" name="tags" />
           <label for="salads">Salads</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="sandwiches-wraps-and-bread"
@@ -174,7 +171,7 @@
           <label for="sandwiches-wraps-and-bread">Sandwiches, wraps and bread</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="breakfast-brunch-and-eggs"
@@ -184,7 +181,7 @@
           <label for="breakfast-brunch-and-eggs">Breakfast, brunch and eggs</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="small-plates-and-sharing"
@@ -194,7 +191,7 @@
           <label for="small-plates-and-sharing">Small plates and sharing</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input
             type="checkbox"
             id="desserts-and-pastries"
@@ -206,49 +203,49 @@
 
         <p class="heading">Spice level</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="not-spicy" value="Not spicy" name="tags" />
           <label for="not-spicy">Not spicy</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="mild" value="Mild" name="tags" />
           <label for="mild">Mild</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="medium" value="Medium" name="tags" />
           <label for="medium">Medium</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="spicy" value="Spicy" name="tags" />
           <label for="spicy">Spicy</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="extra-picy" value="Extra picy" name="tags" />
           <label for="extra-picy">Extra spicy</label>
         </div>
 
         <p class="heading">Diet & allergies</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="vegan" value="Vegan" name="tags" />
           <label for="vegan">Vegan</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="vegetarian" value="Vegetarian" name="tags" />
           <label for="vegetarian">Vegetarian</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="gluten-free" value="Gluten-free" name="tags" />
           <label for="gluten-free">Gluten-free</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="lactose-free" value="Lactose-free" name="tags" />
           <label for="lactose-free">Lactose-free</label>
         </div>
@@ -258,87 +255,5 @@
       </div>
     </form>
 
-    <script>
-      // source: https://usefulangle.com/post/352/javascript-capture-image-from-camera
-      // WEB API's cannot be used in server.js
-      const autodetectFoodButton = document.getElementById("autodetectFoodButton");
-      const dishNameInput = document.getElementById("dishName");
-
-      // you can draw on canvas
-      const canvas = document.getElementById("canvas");
-      const video = document.getElementById("video");
-
-      // if mediaDevices is supported, remove hidden class
-      if (navigator.mediaDevices) {
-        autodetectFoodButton.classList.remove("hidden");
-        autodetectFoodButton.addEventListener("click", async (e) => {
-          // e.preventdefault because any button in a form will automatically submit the form, but that's not what i want to do.
-          e.preventDefault();
-          canvas.classList.add("hidden");
-          video.classList.remove("hidden");
-          // permission to use media with only video | source: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false,
-          });
-          // assign the camera to video | source
-          video.srcObject = stream;
-
-          // setTimeout is a global function (javascript API)
-          setTimeout(async () => {
-            video.classList.add("hidden");
-            canvas.classList.remove("hidden");
-            // draw img onto the canvas, as source we have the video, 00 means it paints the whole canvas with 0 0 | source: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-            canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-            // toDataURL will take anything painted on the canvas and turn it into a jpeg in the form of a dataURL
-            const imageData = canvas.toDataURL("image/jpeg");
-
-            // toDataUrl sends back a data URL, but the API needs an imageUrl, as stated on their documentation and I can do this by using a "blob" | source https://stackoverflow.com/a/65669404/4409162 and https://spoonacular.com/food-api/docs#Image-Classification-File
-
-            // I can fetch (send http get request) any data URL, so I can fetch imageData
-            const blob = await (await fetch(imageData)).blob();
-
-            // you use new because file is a class, you create an array and the only element in the array is blob - file wants an array, hence you make an array with blob in it
-            const file = new File([blob], "fileName.jpg", {
-              type: "image/jpeg",
-              // don't know if it's needed, but just in case
-              lastModified: new Date(),
-            });
-
-            // source https://stackoverflow.com/a/40826943
-            // created a const called formData (name could be anything) and then created a new formData (name needs to be FormData, because it's a class)
-            const formData = new FormData();
-            // spoonacular expects 1 paramater called file into the body, and the value of that file is the binary data (blob turned into file in line 316)
-            // formdata does special encoding, which sets the content type header - spoonacular expects the request body to be in in the format that .append uses
-            formData.append("file", file);
-
-            const response = await fetch(
-              "https://api.spoonacular.com/food/images/classify?apiKey=<%= process.env.API_KEY %>",
-              {
-                // form data is the body of the request
-                method: "POST",
-                body: formData,
-                // formdata (parameter file, value = binary data file (line 316)) will be send, with the POST request to the API
-              }
-            );
-
-            if (response.status === 200) {
-              const responseJson = await response.json();
-              const category = responseJson.category;
-              dishNameInput.value = category;
-            } else {
-              dishNameInput.value = "Could not autodetect";
-            }
-          }, 3000);
-        });
-      }
-    </script>
-
 <%-include('../partials/footer');%>
-<!--I have a few values for my form: 
-  dishName
-  dishImage
-  dishQuality
-  dishIngredients
-  dishTags
--->
+

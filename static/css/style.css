@@ -1,60 +1,176 @@
-/*****CUSTOM COLORS*****/
-:root {
-  --bg-color: #f3f3f3;
-  --light-bg-color: #ffffff;
-
-  --text-color: #4f4f4f;
-  --light-text-color: #a5a5a5;
-
-  --primary-color: #41c1a5;
-  --secondary-color: #fcab61;
-
-  --quality-filled: #fcbe61;
-  --quality-not-filled: #c5c5c5;
-
-  --empty-image: #dcdcdc;
-
-  --box-shadow-blur: #00000071;
-  --selected-color: #06896c;
-
-  --errormessages: red;
-  --delete-color: #ed6f6f;
-}
-
-*,
-*:before,
-*:after,
-html {
-  margin: 0;
-  padding: 0;
-  font-family: "Lato", sans-serif;
-  box-sizing: border-box;
-}
-
 body {
-  background-color: var(--bg-color);
+  background-color: #f3f3f3;
   padding: 20px 40px;
 }
+
 .hidden {
   display: none;
 }
-/*****TEXT STYLING*****/
+
+.error {
+  color: red;
+  font-style: italic;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 1em 0;
+  text-align: center;
+  border: 3px solid #41c1a5;
+  border-radius: 5px;
+  color: #f3f3f3;
+  background-color: #41c1a5;
+}
+
+.primaryButton {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  margin-right: 1em;
+}
+
+.deleteButton {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  width: 60%;
+  padding: 0.9em;
+  border-radius: 3px;
+  background-color: #ed6f6f;
+  border: none;
+  color: #ffffff;
+}
+
+#logout {
+  width: 25%;
+  margin-bottom: 1em;
+}
+
+.start-options {
+  display: grid;
+}
+.start-options a:first-of-type {
+  background-color: #41c1a5;
+}
+.start-options a:last-of-type {
+  background-color: #f3f3f3;
+  color: #41c1a5;
+}
+
+.editButtons {
+  display: flex;
+}
+
+.floatingActionButton {
+  position: fixed;
+  right: 5%;
+  bottom: 15%;
+  color: #ffffff;
+  background-color: #41c1a5;
+  padding: 0.1em 0.4em;
+  border-radius: 5em;
+  font-size: 3em;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4431372549);
+  font-weight: 700;
+}
+
+.backButton {
+  padding-right: 1em;
+}
+.backButton:hover {
+  color: #4f4f4f;
+}
+.backButton:active {
+  color: #4f4f4f;
+}
+
+.dish-frame {
+  background-color: #ffffff;
+  display: grid;
+  border-radius: 0.3em;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "one two";
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4431372549);
+}
+.dish-frame .dishText {
+  grid-area: two;
+  padding: 1.5em 1em;
+}
+.dish-frame .dishText p:first-of-type {
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.dish-frame .dishImage {
+  background-color: #4f4f4f;
+  grid-area: one;
+  border-radius: 0.3em 0 0 0.3em;
+  max-width: 200px;
+}
+.dish-frame .dishImage img {
+  max-width: 100%;
+  border-radius: 0.3em 0 0 0.3em;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qualityText {
+  font-size: 0.9em;
+  padding-top: 10px;
+}
+
+.dishCover {
+  width: 100%;
+  max-height: 240px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+footer {
+  margin-top: 20px;
+  width: 100%;
+  padding: 1em;
+}
+footer ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}
+footer li {
+  display: block;
+  padding: 10px;
+  min-width: 48px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 h1 {
   font-weight: 400;
-  color: var(--text-color);
   padding-bottom: 20px;
 }
 
 h2,
 h3 {
   font-weight: 700;
-  color: var(--text-color);
   padding: 0 0 10px;
+}
+h2.dishDetails,
+h3.dishDetails {
+  padding-top: 20px;
 }
 
 p,
 li {
-  color: var(--text-color);
   font-weight: 400;
   padding-bottom: 5px;
 }
@@ -66,105 +182,126 @@ li {
 a {
   text-decoration: none;
 }
-
-/*article in dish.ejs*/
-article {
-  background-color: var(--light-bg-color);
-  display: grid;
-  border-radius: 0.3em;
-  margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-areas: "one two";
-  box-shadow: 0 2px 10px var(--box-shadow-blur);
+a:hover {
+  opacity: 0.5;
+}
+a:active {
+  opacity: 0.5;
 }
 
-/* main button styling */
-.btn {
+form > div {
+  margin: 40px 0 40px 0;
+  justify-content: center;
+  display: flex;
+}
+form input {
   width: 100%;
-  padding: 12px 20px;
-  margin: 1em 0;
-  text-align: center;
-  border: 3px solid var(--primary-color);
-  border-radius: 5px;
-  color: var(--bg-color);
-  background-color: var(--primary-color);
-}
-
-/*****START SCREEN***/
-.start-options {
-  display: grid;
-}
-
-.start-options a:first-of-type {
-  background-color: var(--primary-color);
-}
-.start-options a:last-of-type {
-  background-color: var(--bg-color);
-  color: var(--primary-color);
-}
-
-/*****FORM STYLING***/
-input {
-  width: 100%;
-  border: 2px solid var(--light-text-color);
+  border: 2px solid #a5a5a5;
   border-radius: 5px;
   padding-bottom: 10px;
 }
-
-input:not(#submit) {
+form input:not(#submit) {
   padding: 0 0.8em;
   height: 2.5em;
   font-size: 1em;
 }
-
-input::placeholder,
-.error-input {
+form input::placeholder {
   color: red;
   font-style: italic;
 }
-
-input[name="dishQuality"] {
+form input:focus {
+  outline: none !important;
+  border: 2px solid #41c1a5;
+  color: #41c1a5;
+}
+form input[name=dishQuality] {
   width: 100%;
   height: 2.5em;
-  border: 2px solid var(--light-text-color);
+  border: 2px solid #a5a5a5;
   border-radius: 5px;
 }
-
-fieldset {
+form input[type=file] {
+  border: none;
+}
+form fieldset {
   border: none;
   display: flex;
   flex-direction: column;
 }
-
-legend {
+form fieldset legend {
   padding-bottom: 10px;
   font-weight: bold;
-  color: var(--text-color);
+  color: #4f4f4f;
   padding-top: 20px;
 }
-
-legend::after {
+form fieldset legend::after {
   content: "*";
   margin-left: 5px;
-  color: var(--errormessages);
+  color: red;
 }
-.forgiveness {
+form fieldset video {
+  align-self: center;
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+}
+form fieldset canvas {
+  align-self: center;
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+}
+form fieldset .heading {
+  background-color: #ffffff;
+  padding: 0.8em 0 0.8em 1em;
+  border: solid 3px #4f4f4f;
+  border-radius: 5px;
+  font-size: 1em;
+  margin: 1em 0 1em 0;
+}
+form fieldset .subtext {
+  color: #a5a5a5;
+  font-size: 0.9em;
+  padding-bottom: 0.5em;
+}
+form fieldset .forgiveness {
   color: lightgray;
 }
-
-span a {
-  color: var(--primary-color);
+form fieldset #autodetectFoodButton {
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.9em;
+  background: #fcab61;
+  margin: 0.5em 0;
+  margin-top: 0.5em;
+  width: 10em;
+  align-self: center;
+}
+form fieldset .dishInput {
+  margin: 0.8em 0 0.8em;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "one two";
+  align-items: center;
+}
+form fieldset input {
+  grid-area: two;
+}
+form fieldset label {
+  grid-area: one;
+}
+form span a {
+  color: #41c1a5;
 }
 
-/*****FORM RESPONSE***/
 .form-respond {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .form-respond div {
   width: 100%;
   padding: 20px;
@@ -172,26 +309,22 @@ span a {
   border-radius: 4px;
   border: 2px solid gray;
   color: inherit;
-  background-color: var(--empty-image);
+  background-color: #dcdcdc;
 }
-
 .form-respond h3 {
   letter-spacing: -1px;
   margin-bottom: 20px;
 }
-
 .form-respond p:last-of-type {
   line-height: 20px;
   margin-bottom: 20px;
 }
 
-/*favoriteButton*/
 #favoritesButton {
   background-color: transparent;
   border: none;
   margin-left: 97%;
 }
-
 #favoritesButton img {
   width: 2.5em;
 }
@@ -202,277 +335,20 @@ span a {
   border: none;
   display: flex;
 }
-
- #favorite button img {
+#favorite button img {
   width: 2.3em;
   cursor: pointer;
-} 
-
-#favorite button img:hover{
-transform: scale(.8);
+}
+#favorite button img:hover {
+  transform: scale(0.8);
 }
 
-/*****SPECIFIC FORM STYLING***/
-
-input[type="file"] {
-  border: none;
-}
-
-/*****SPECIFIC TEXT STYLING***/
-
-/***styling added for edit-dish.ejs***/
-/*primary button*/
-.primaryButton {
-  width: 60%;
-  padding: 0.9em;
-  border-radius: 3px;
-  background-color: var(--primary-color);
-  border: none;
-  color: var(--light-bg-color);
-}
-
-a.primaryButton,
-a.deleteButton {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-a.primaryButton {
-  margin-right: 1em;
-}
-
-/*secondary button*/
-.secondaryButton {
-  color: var(--light-bg-color);
-  border: none;
-  border-radius: 3px;
-  padding: 0.9em;
-  background: var(--secondary-color);
-  margin: 0.5em 0;
-  margin-top: 0.5em;
-  width: 10em;
-}
-
-/*delete button*/
-.deleteButton {
-  width: 60%;
-  padding: 0.9em;
-  border-radius: 3px;
-  background-color: var(--delete-color);
-  border: none;
-  color: var(--light-bg-color);
-}
-
-#logout {
-  width: 25%;
-  margin-bottom: 1em;
-}
-
-/*div of editButton and deleteButton*/
-.editButtons {
-  display: flex;
-}
-
-/***styling for dishes.ejs***/
-/*a > article > div > text*/
-.dishText {
-  grid-area: two;
-  padding: 1.5em 1em;
-}
-
-.dishText > p {
-  /*source: https://www.positioniseverything.net/css-character-limit*/
-  overflow: hidden;
-  word-break: break-word;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-/*a > article > div > image*/
-.dishImage {
-  background-color: var(--text-color);
-  grid-area: one;
-  border-radius: 0.3em 0 0 0.3em;
-  max-width: 200px;
-}
-
-.dishImage > img {
-  max-width: 100%;
-  border-radius: 0.3em 0 0 0.3em;
-  height: 100%;
-  object-fit: cover;
-}
-
-/*text that shows quality is usually smaller*/
-.qualityText {
-  font-size: 0.9em;
-  padding-top: 10px;
-}
-
-/*floating action button background*/
-.floatingActionButton {
-  position: fixed;
-  right: 5%;
-  bottom: 15%;
-  color: var(--light-bg-color);
-  background-color: var(--primary-color);
-  padding: 0.1em 0.4em;
-  border-radius: 5em;
-  font-size: 3em;
-  box-shadow: 0 0 4px var(--box-shadow-blur);
-  font-weight: 700;
-}
-
-/***styling added for add-dishes.ejs***/
-.backButton {
-  padding-right: 1em;
-}
-
-/*to center primary button*/
-form > div {
-  margin: 40px 0 40px 0;
-  justify-content: center;
-  display: flex;
-}
-
-/*p element in the form*/
-.heading {
-  background-color: var(--light-bg-color);
-  padding: 0.8em 0 0.8em 1em;
-  border: solid 3px var(--text-color);
-  border-radius: 5px;
-  font-size: 1em;
-  margin: 1em 0 1em 0;
-}
-
-/*subtext in the form*/
-.subtext {
-  color: var(--light-text-color);
-  font-size: 0.9em;
-  padding-bottom: 0.5em;
-}
-
-.hidden {
-  display: none;
-}
-
-#video {
-  align-self: center;
-  border-radius: 5px;
-  width: 100%;
-  height: auto;
-}
-
-#canvas {
-  align-self: center;
-  border-radius: 5px;
-  width: 100%;
-  height: auto;
-}
-
-.h3dishDetails {
-  padding-top: 20px;
-}
-
-#autodetectFoodButton {
-  color: var(--light-bg-color);
-  border: none;
-  border-radius: 3px;
-  padding: 0.9em;
-  background: var(--secondary-color);
-  margin: 0.5em 0;
-  margin-top: 0.5em;
-  width: 10em;
-  align-self: center;
-}
-
-.input {
-  margin: 0.8em 0 0.8em;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "one two";
-  align-items: center;
-}
-
-.input > input {
-  grid-area: two;
-}
-
-.input > label {
-  grid-area: one;
-}
-
-/*error message*/
-.error {
-  color: red;
+* {
   padding: 0;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+  color: #4f4f4f;
 }
 
-/***styling for dish-details.ejs***/
-.img {
-  width: 100%;
-  max-height: 240px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-/*****HOVER STATES (for pc only)*****/
-a:hover {
-  opacity: 0.5;
-}
-
-.backButton:hover {
-  color: var(--text-color);
-}
-
-/*****ACTIVE STATES*****/
-a:active {
-  opacity: 0.5;
-}
-
-.backButton:active {
-  color: var(--text-color);
-}
-
-/*****FOCUS STATES*****/
-
-input:focus {
-  outline: none !important;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-/*****FOOTER*****/
-footer {
-  margin-top: 20px;
-  width: 100%;
-  padding: 1em;
-}
-
-footer ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
-footer li {
-  display: block;
-  padding: 10px;
-  min-width: 48px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
-  color: var(--primary-color);
-}
-
-/*****BEFORE AND AFTER STATES*****/
+/*# sourceMappingURL=style.css.map */

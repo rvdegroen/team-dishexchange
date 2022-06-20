@@ -5,7 +5,11 @@ if (process.env.NODE_ENV !== "production") {
 // REQUIRE VARIABLES
 const connectDB = require("./config/db");
 const express = require("express");
+const flash = require("express-flash");
+const session = require("express-session");
+const passport = require("passport");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
 // const passport = require("passport");
 
@@ -29,29 +33,38 @@ let userCollection;
 connectDB();
 
 // ROUTES
-const main = require("./routers/main");
-const register = require("./routers/user");
+const main = require("./routers/pages");
+const user = require("./routers/user");
 const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
 const favorite = require("./routers/like");
 
 // MIDDLEWARE
-// express knows all my static files are in my static folder
 app.use(express.static("static"));
 // parse application/json
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // dont save if nothing in de session has change
+    saveUninitialized: false, // don't save an empty value
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
 
 app.use("/", main);
-  app.use("/user/", register);
-  app.use("/profile/", profile);
-  app.use("/dishes/", dishes);
-  app.use("/favorite/", favorite);
-  app.use((req, res) => {
-    res.status(404).send("This page does not exist!");
-  }); // 404 error pages
+app.use("/user/", user);
+app.use("/profile/", profile);
+app.use("/dishes/", dishes);
+app.use("/favorite/", favorite);
+app.use((req, res) => {
+  res.status(404).send("This page does not exist!");
+}); // 404 error pages
 
 // APP LISTENING
 app.listen(process.env.PORT || 3000);

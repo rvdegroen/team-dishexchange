@@ -1,6 +1,6 @@
 <% for (let arrayNumber=0; arrayNumber < myDishes.length; arrayNumber++) { %>
-<a href="/dishes/<%=myDishes[arrayNumber]._id%>">
-  <article>
+<a href="/dish/<%=myDishes[arrayNumber]._id%>">
+  <article class="dish-frame">
     <div>
       <div class="dishText">
         <form action="/favorite/dishes" id="favorite" method="post">

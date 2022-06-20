@@ -1,6 +1,5 @@
 <%-include('../partials/header');%>
 
-
     <h1><%-include('../partials/back')%><%=dish.name%></h1>
 
     <p id="error" class="error"><% if (typeof error !== 'undefined') {%> <%= error %><% } %></p>
@@ -8,18 +7,18 @@
     <img
       src="<%= dish.img === null ? 'https://place-hold.it/640x360&fontsize=24' : `/images/uploads/${dish.img}` %>"
       alt=""
-      class="img"
+      class="dishCover"
     />
     <h2><%=dish.name%></h2>
     <p class="qualityText">Quality: <%=dish.quality%></p>
-    <h3 class="h3dishDetails">Ingredients</h3>
+    <h3 class="dishDetails">Ingredients</h3>
     <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
     <ul>
       <% for (let ingredient of dish.ingredients) { %>
       <li><%= ingredient %></li>
       <% } %>
     </ul>
-    <h3 class="h3dishDetails">Tags</h3>
+    <h3 class="dishDetails">Tags</h3>
     <!--source: https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs-->
     <ul>
       <% for (let tag of dish.tags) { %>
@@ -27,28 +26,8 @@
       <% } %>
     </ul>
     <div class="editButtons">
-      <a href="/dishes/edit/<%=dish._id%>" class="primaryButton">Edit</a>
+      <a href="/edit-dish/<%=dish._id%>" class="primaryButton">Edit</a>
       <a onclick="deleteDish('<%=dish._id%>')" class="deleteButton">Delete</a>
     </div>
 
     <%-include('../partials/footer');%>
-    <script>
-      async function deleteDish(dishId) {
-        // fetch sends HTTP request to run the method delete
-        const response = await fetch("/dishes/delete/" + dishId, {
-          method: "DELETE",
-        });
-        // if response is .ok, it will redirect to the route
-        if (response.ok) {
-          window.location.href = "/user/overview";
-        } else {
-          let error = document.getElementById("error");
-          // show err.message from server.js
-          const errorMessage = await response.text();
-          error.textContent = errorMessage;
-          console.log(errorMessage);
-        }
-      }
-    </script>
-  </body>
-</html>

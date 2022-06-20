@@ -1,9 +1,9 @@
 <%-include('../partials/header');%>
 <nav>
-    <a href="/favorite/dishes" id="favoritesButton"><img src="/images/img/like.png" alt="Favorite dishes" /></a>
+    <a href="/favorite" id="favoritesButton"><img src="/images/img/like.png" alt="Favorite dishes" /></a>
 </nav>
 
-<form action="/user/logout?_method=DELETE" method="POST">
+<form action="/logout?_method=DELETE" method="POST">
     <button type="submit" id="logout" class="deleteButton">Log out</button>
 </form>
     <h1>Hi <%= user.name %> Your Menu</h1>
@@ -13,6 +13,6 @@
         <%-include('../partials/dish') %>
 
 
-    <a href="/dishes/add-dish" class="floatingActionButton">+</a>
+    <a href="/add-dishes" class="floatingActionButton">+</a>
 
 <%-include('../partials/footer');%>

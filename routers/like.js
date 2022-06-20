@@ -4,17 +4,7 @@ const { ObjectId } = require("mongodb");
 
 const favorite = express.Router();
 
-// favorite dish page
-favorite.get("/dishes", async (req, res) => {
-  const myFavoriteDishes = await dishesCollection
-    .find({
-      like: true,
-    })
-    .toArray();
 
-
-  res.render("pages/favo-dish", { myFavoriteDishes });
-});
 
 favorite.post("/dishes", async (req, res) => {
   const myFavoriteDishes = await dishesCollection.updateOne(

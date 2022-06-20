@@ -1,50 +1,46 @@
 <%-include('../partials/header');%>
 
-  <body>
-    <!-- in edit your dish, put dishname-->
     <h1><%-include('../partials/back') %> Edit your Dish</h1>
-    <!--error message-->
+
     <% if (typeof error !== 'undefined') {%>
     <p class="error"><%= error %></p>
     <% } %>
     <img
       src="<%= dish.img === null ? 'https://place-hold.it/640x360&fontsize=24' : `/images/uploads/${dish.img}` %>"
       alt=""
-      class="img"
+      class="dishCover"
     />
-    <!--for the action, I want to send you to the dish-details.ejs page + the id of the dish you just created-->
-    <form action="" method="post" enctype="multipart/form-data">
-      <!--uploading an image using multer-->
+    <form action="/dishes/edit-dish/<%=dish._id%>" method="post" enctype="multipart/form-data">
+
       <fieldset>
         <input type="file" name="uploadImage" accept="image/*" />
       </fieldset>
-      <!--edit feature: to edit the dish / document in mongoDB-->
+
       <fieldset>
         <legend>Name of the dish</legend>
         <input type="text" id="dishName" name="dishName" required value="<%=dish.name%>" />
         <button id="autodetectFoodButton" class="hidden">Autodetect dish</button>
-        <!-- this is NOT inline styling, determines the size of the screenshot-->
-        <video id="video" width="320" height="240" class="hidden" autoplay></video>
-        <canvas id="canvas" width="320" height="240" class="hidden"></canvas>
+        <video width="320" height="240" class="hidden" autoplay></video>
+        <canvas width="320" height="240" class="hidden"></canvas>
       </fieldset>
 
       <fieldset>
         <legend>Dish quality</legend>
         <p class="subtext">How good are you at making this dish?</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality1" value="1" name="dishQuality" required
           <%=Number(dish.quality) === 1 ? "checked" : "" %> />
           <label for="dishQuality1">1</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality2" value="2" name="dishQuality" required
           <%=Number(dish.quality) === 2 ? "checked" : "" %> />
           <label for="dishQuality2">2</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="radio" id="dishQuality3" value="3" name="dishQuality" required
           <%=Number(dish.quality) === 3 ? "checked" : "" %> />
           <label for="dishQuality3">3</label>
@@ -67,43 +63,43 @@
         <!--if there is no js, then dont have dropwdowns and just input field-->
         <p class="heading">Cuisine</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="european" value="European" name="tags" <%=
           (dish.tags).includes("European") ? "checked" : "" %>/>
           <label for="european">European</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="middle-eastern" value="Middle Eastern" name="tags" <%=
           (dish.tags).includes("Middle Eastern") ? "checked" : "" %>/>
           <label for="middle-eastern">Middle Eastern</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="african" value="African" name="tags" <%=
           (dish.tags).includes("African") ? "checked" : "" %>/>
           <label for="african">African</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="asian" value="Asian" name="tags" <%=
           (dish.tags).includes("Asian") ? "checked" : "" %>/>
           <label for="asian">Asian</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="north-american" value="North American" name="tags" <%=
           (dish.tags).includes("North American") ? "checked" : "" %>/>
           <label for="north-american">North American</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="south-american" value="South American" name="tags" <%=
           (dish.tags).includes("South American") ? "checked" : "" %>/>
           <label for="South American">South American</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="other-cuisines" value="Other cuisines" name="tags" <%=
           (dish.tags).includes("Other cuisines") ? "checked" : "" %>/>
           <label for="Other cuisines">Other cuisines</label>
@@ -111,97 +107,97 @@
 
         <p class="heading">Dish type</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="meat" value="Meat" name="tags" <%= (dish.tags).includes("Meat")
           ? "checked" : "" %>/>
           <label for="meat">Meat</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="fish" value="Fish" name="tags" <%= (dish.tags).includes("Fish")
           ? "checked" : "" %>/>
           <label for="fish">Fish</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="shellfish-and-seafood" value="Shellfish and seafood"
           name="tags" <%= (dish.tags).includes("Shellfish and seafood") ? "checked" : "" %> />
           <label for="shellfish-and-seafood">Shellfish and seafood</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="vegetables-and-sides" value="Vegetables and sides" name="tags"
           <%= (dish.tags).includes("Vegetables and sides") ? "checked" : "" %> />
           <label for="vegetables-and-sides">Vegetables and sides</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="pasta-and-noodles" value="Pasta and noodles" name="tags" <%=
           (dish.tags).includes("Pasta and noodles") ? "checked" : "" %>/>
           <label for="pasta-and-noodles">Pasta and noodles</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="pizza" value="Pizza" name="tags" <%=
           (dish.tags).includes("Pizza") ? "checked" : "" %>/>
           <label for="pizza">Pizza</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="burgers" value="Burgers" name="tags" <%=
           (dish.tags).includes("Burgers") ? "checked" : "" %>/>
           <label for="burgers">Burgers</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="stews-and-curries" value="Stews and curries" name="tags" <%=
           (dish.tags).includes("Stews and curries") ? "checked" : "" %>/>
           <label for="stews-and-curries">Stews and curries</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="sushi-and-poke" value="Sushi and poke" name="tags" <%=
           (dish.tags).includes("Sushi and poke") ? "checked" : "" %>/>
           <label for="sushi-and-poke">Sushi and poke</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="kebab-and-skewers" value="Kebab and skewers" name="tags" <%=
           (dish.tags).includes("Kebab and skewers") ? "checked" : "" %>/>
           <label for="kebab-and-skewers">Kebab and skewers</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="soup-and-ramen" value="Soup and ramen" name="tags" <%=
           (dish.tags).includes("Soup and ramen") ? "checked" : "" %>/>
           <label for="soup-and-ramen">Soup and ramen</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="salads" value="Salads" name="tags" <%=
           (dish.tags).includes("Salads") ? "checked" : "" %>/>
           <label for="salads">Salads</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="sandwiches-wraps-and-bread" value="Sandwiches, wraps and bread"
           name="tags" <%= (dish.tags).includes("Sandwiches, wraps and bread") ? "checked" : "" %> />
           <label for="sandwiches-wraps-and-bread">Sandwiches, wraps and bread</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="breakfast-brunch-and-eggs" value="Breakfast, brunch and eggs"
           name="tags" <%= (dish.tags).includes("Breakfast, brunch and eggs") ? "checked" : "" %> />
           <label for="breakfast-brunch-and-eggs">Breakfast, brunch and eggs</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="small-plates-and-sharing" value="Small plates and sharing"
           name="tags" <%= (dish.tags).includes("Small plates and sharing") ? "checked" : "" %> />
           <label for="small-plates-and-sharing">Small plates and sharing</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="desserts-and-pastries" value="Desserts and pastries"
           name="tags" <%= (dish.tags).includes("Desserts and pastries") ? "checked" : "" %> />
           <label for="desserts-and-pastries">Desserts and pastries</label>
@@ -209,31 +205,31 @@
 
         <p class="heading">Spice level</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="not-spicy" value="Not spicy" name="tags" <%=
           (dish.tags).includes("Not spicy") ? "checked" : "" %>/>
           <label for="not-spicy">Not spicy</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="mild" value="Mild" name="tags" <%= (dish.tags).includes("Mild")
           ? "checked" : "" %>/>
           <label for="mild">Mild</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="medium" value="Medium" name="tags" <%=
           (dish.tags).includes("Medium") ? "checked" : "" %>/>
           <label for="medium">Medium</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="spicy" value="Spicy" name="tags" <%=
           (dish.tags).includes("Spicy") ? "checked" : "" %>/>
           <label for="spicy">Spicy</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="extra-picy" value="Extra spicy" name="tags" <%=
           (dish.tags).includes("Extra spicy") ? "checked" : "" %>/>
           <label for="extra-picy">Extra spicy</label>
@@ -241,25 +237,25 @@
 
         <p class="heading">Diet & allergies</p>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="vegan" value="Vegan" name="tags" <%=
           (dish.tags).includes("Vegan") ? "checked" : "" %>/>
           <label for="vegan">Vegan</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="vegetarian" value="Vegetarian" name="tags" <%=
           (dish.tags).includes("Vegetarian") ? "checked" : "" %>/>
           <label for="vegetarian">Vegetarian</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="gluten-free" value="Gluten-free" name="tags" <%=
           (dish.tags).includes("Gluten-free") ? "checked" : "" %>/>
           <label for="gluten-free">Gluten-free</label>
         </div>
 
-        <div class="input">
+        <div class="dishInput">
           <input type="checkbox" id="lactose-free" value="Lactose-free" name="tags" <%=
           (dish.tags).includes("Lactose-free") ? "checked" : "" %>/>
           <label for="lactose-free">Lactose-free</label>
@@ -270,88 +266,4 @@
       </div>
     </form>
 
-    <script>
-      // source: https://usefulangle.com/post/352/javascript-capture-image-from-camera
-      // WEB API's cannot be used in server.js
-      const autodetectFoodButton = document.getElementById("autodetectFoodButton");
-      const dishNameInput = document.getElementById("dishName");
-
-      // you can draw on canvas
-      const canvas = document.getElementById("canvas");
-      const video = document.getElementById("video");
-
-      // if mediaDevices is supported, remove hidden class
-      if (navigator.mediaDevices) {
-        autodetectFoodButton.classList.remove("hidden");
-        autodetectFoodButton.addEventListener("click", async (e) => {
-          // e.preventdefault because any button in a form will automatically submit the form, but that's not what i want to do.
-          e.preventDefault();
-          canvas.classList.add("hidden");
-          video.classList.remove("hidden");
-          // permission to use media with only video | source: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false,
-          });
-          // assign the camera to video | source
-          video.srcObject = stream;
-
-          // setTimeout is a global function (javascript API)
-          setTimeout(async () => {
-            video.classList.add("hidden");
-            canvas.classList.remove("hidden");
-            // draw img onto the canvas, as source we have the video, 00 means it paints the whole canvas with 0 0 | source: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-            canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-            // toDataURL will take anything painted on the canvas and turn it into a jpeg in the form of a dataURL
-            const imageData = canvas.toDataURL("image/jpeg");
-
-            // toDataUrl sends back a data URL, but the API needs an imageUrl, as stated on their documentation and I can do this by using a "blob" | source https://stackoverflow.com/a/65669404/4409162 and https://spoonacular.com/food-api/docs#Image-Classification-File
-
-            // I can fetch (send http get request) any data URL, so I can fetch imageData
-            const blob = await (await fetch(imageData)).blob();
-
-            // you use new because file is a class, you create an array and the only element in the array is blob - file wants an array, hence you make an array with blob in it
-            const file = new File([blob], "fileName.jpg", {
-              type: "image/jpeg",
-              // don't know if it's needed, but just in case
-              lastModified: new Date(),
-            });
-
-            // source https://stackoverflow.com/a/40826943
-            // created a const called formData (name could be anything) and then created a new formData (name needs to be FormData, because it's a class)
-            const formData = new FormData();
-            // spoonacular expects 1 paramater called file into the body, and the value of that file is the binary data (blob turned into file in line 316)
-            // formdata does special encoding, which sets the content type header - spoonacular expects the request body to be in in the format that .append uses
-            formData.append("file", file);
-
-            const response = await fetch(
-              "https://api.spoonacular.com/food/images/classify?apiKey=<%= process.env.API_KEY %>",
-              {
-                // form data is the body of the request
-                method: "POST",
-                body: formData,
-                // formdata (parameter file, value = binary data file (line 316)) will be send, with the POST request to the API
-              }
-            );
-
-            if (response.status === 200) {
-              const responseJson = await response.json();
-              const category = responseJson.category;
-              dishNameInput.value = category;
-            } else {
-              dishNameInput.value = "Could not autodetect";
-            }
-          }, 3000);
-        });
-      }
-    </script>
-  </body>
-</html>
-
-<!--I have a few values for my form: 
-  dishName
-  dishImage
-  dishQuality
-  dishIngredients
-  dishTags
--->
+      <%-include('../partials/footer');%>
