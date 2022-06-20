@@ -16,31 +16,34 @@ const register = async (req, res) => {
       password: hashedPassword,
       mydish: [],
     });
-    res.redirect("/login");
-  } catch {
     res.redirect("/register");
+  } catch {
+    res.status(400).send(err.message);
   }
 };
 
 // EDIT USER
 const edit = async (req, res) => {
-  await userCollection.updateOne(
-    { _id: ObjectId(req.body.userId) },
-    {
-      $set: {
-        _id: ObjectId(req.body.userId),
-        country: req.body.country,
-        city: req.body.city,
-        phone: req.body.phone,
-        dob: req.body.dob,
-        email: req.body.email,
-        username: req.body.username,
-        name: req.body.name,
-      },
-    }
-  );
-
-  res.redirect("/profile");
+  try {
+    await userCollection.updateOne(
+      { _id: ObjectId(req.body.userId) },
+      {
+        $set: {
+          _id: ObjectId(req.body.userId),
+          country: req.body.country,
+          city: req.body.city,
+          phone: req.body.phone,
+          dob: req.body.dob,
+          email: req.body.email,
+          username: req.body.username,
+          name: req.body.name,
+        },
+      }
+    );
+    res.redirect("/profile");
+  } catch {
+    res.status(400).send(err.message);
+  }
 };
 
 // DELETE USER

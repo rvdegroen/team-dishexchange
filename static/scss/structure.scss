@@ -1,6 +1,6 @@
 body {
   background-color: color(tertiary);
-  padding: 20px 40px;
+  padding: 20px;
 }
 
 .hidden {
@@ -13,7 +13,7 @@ body {
 
 .btn {
   width: 100%;
-  padding: 12px 20px;
+  padding: 0.9em;
   margin: 1em 0;
   text-align: center;
   border: 3px solid color(primary);
@@ -43,14 +43,9 @@ body {
   border: none;
   color: color(quaternary);
 
-  &:hover{
-        opacity: 0.5;
+  &:hover {
+    opacity: 0.5;
   }
-}
-
-#logout {
-  width: 25%;
-  margin-bottom: 1em;
 }
 
 .start-options {
@@ -84,8 +79,6 @@ body {
   font-weight: 700;
 }
 .backButton {
-  padding-right: 1em;
-
   &:hover {
     color: color(text-color);
   }
@@ -96,8 +89,6 @@ body {
 }
 
 .profile-info {
-  display: flex;
-  justify-content: space-between;
   margin-top: 1em;
 }
 .dish-frame {
@@ -140,34 +131,16 @@ body {
     }
   }
 
-  form {
-    button {
-      color: transparent;
-      background-color: transparent;
-      border: none;
-      display: flex;
-
-      img {
-        width: 2.3em;
-        cursor: pointer;
-
-        &:hover {
-          transform: scale(0.8);
-        }
-      }
-    }
+  .qualityText {
+    font-size: 0.9em;
+    padding-top: 10px;
   }
-}
 
-.qualityText {
-  font-size: 0.9em;
-  padding-top: 10px;
-}
-
-.dishCover {
-  width: 100%;
-  max-height: 240px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  object-fit: cover;
+  .dishCover {
+    width: 100%;
+    max-height: 240px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
 }

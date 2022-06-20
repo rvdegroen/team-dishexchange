@@ -16,11 +16,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// add-dish post into mongoDB
 app.post("/add-dish", upload.single("uploadImage"), dishes.add);
-
 app.post("/edit-dish/:dishId", upload.single("uploadImage"), dishes.edit);
-
 app.delete("/delete", dishes.deleteOne);
 
 module.exports = app;

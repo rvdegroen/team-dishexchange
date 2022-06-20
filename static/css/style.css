@@ -1,6 +1,6 @@
 body {
   background-color: #f3f3f3;
-  padding: 20px 40px;
+  padding: 20px;
 }
 
 .hidden {
@@ -14,7 +14,7 @@ body {
 
 .btn {
   width: 100%;
-  padding: 12px 20px;
+  padding: 0.9em;
   margin: 1em 0;
   text-align: center;
   border: 3px solid #41c1a5;
@@ -47,11 +47,6 @@ body {
   opacity: 0.5;
 }
 
-#logout {
-  width: 25%;
-  margin-bottom: 1em;
-}
-
 .start-options {
   display: grid;
 }
@@ -80,9 +75,6 @@ body {
   font-weight: 700;
 }
 
-.backButton {
-  padding-right: 1em;
-}
 .backButton:hover {
   color: #4f4f4f;
 }
@@ -91,8 +83,6 @@ body {
 }
 
 .profile-info {
-  display: flex;
-  justify-content: space-between;
   margin-top: 1em;
 }
 
@@ -131,26 +121,11 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.dish-frame form button {
-  color: transparent;
-  background-color: transparent;
-  border: none;
-  display: flex;
-}
-.dish-frame form button img {
-  width: 2.3em;
-  cursor: pointer;
-}
-.dish-frame form button img:hover {
-  transform: scale(0.8);
-}
-
-.qualityText {
+.dish-frame .qualityText {
   font-size: 0.9em;
   padding-top: 10px;
 }
-
-.dishCover {
+.dish-frame .dishCover {
   width: 100%;
   max-height: 240px;
   margin-bottom: 20px;
@@ -160,15 +135,14 @@ body {
 
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 nav aside {
   display: flex;
-  gap: 2em;
 }
-nav.profile {
-  justify-content: space-between;
+nav aside form {
+  margin-left: 1em;
 }
 nav a img {
   width: 2.5em;
@@ -338,6 +312,19 @@ form fieldset label {
 }
 form span a {
   color: #41c1a5;
+}
+form button {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
+form button img {
+  width: 2.3em;
+  cursor: pointer;
+}
+form button img:hover {
+  transform: scale(0.8);
 }
 
 .form-respond {

@@ -23,7 +23,6 @@ app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
       const myDishes = data.flat(); // squeeze multiple array
 
       res.render("pages/dishes", {
-        // variables in the front-end
         numberOfDishes: myDishes.length,
         myDishes,
         user,
@@ -41,33 +40,29 @@ app.get("/dish/:dishId", checkAuthenticated, async (req, res) => {
   const urlId = req.params.dishId;
   const query = { _id: new ObjectId(urlId) };
   const dish = await dishesCollection.findOne(query);
-  // making sure that when you click on a dish, it will console.log the dish
 
   res.render("pages/dish-details", {
-    // variables in the front-end
     dish,
   });
 });
 
 app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
-  const myDishes = await dishesCollection
-    .find({
-      like: true,
-    })
-    .toArray();
+  const sessionUser = req.session.passport.user;
 
-  res.render("pages/favo-dish", { myDishes });
-});
+  const user = await userCollection.findOne({ _id: ObjectId(sessionUser) }, {});
+  if (user.mydish) {
+    const items = user.mydish.map((item) =>
+      dishesCollection.find({ _id: new ObjectId(item), like: true }, {}).toArray()
+    );
 
-// dish details edit page
-app.get("/edit-dish/:dishId", checkAuthenticated, async (req, res) => {
-  const urlId = req.params.dishId;
-  const query = { _id: new ObjectId(urlId) };
-  const dish = await dishesCollection.findOne(query);
+    Promise.all(items).then((data) => {
+      const myDishes = data.flat(); // squeeze multiple array
 
-  res.render("pages/edit-dish", {
-    dish,
-  });
+      res.render("pages/favo-dish", {
+        myDishes,
+      });
+    });
+  }
 });
 
 // USER ROUTES
@@ -79,7 +74,7 @@ app.get("/profile", checkAuthenticated, async (req, res) => {
   const sessionUser = req.session.passport.user;
   const query = { _id: ObjectId(sessionUser) };
   const user = await userCollection.findOne(query);
-  res.render("pages/userprofile", { user});
+  res.render("pages/userprofile", { user });
 });
 
 app.get("/edit-profile", async (req, res) => {

@@ -1,15 +1,15 @@
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   aside{
     display: flex;
-    gap: 2em;
+    form{
+      margin-left: 1em;
+    }
   }
-  &.profile {
-    justify-content: space-between;
-  }
+
 
   a {
     img {

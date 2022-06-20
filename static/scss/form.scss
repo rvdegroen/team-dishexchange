@@ -127,6 +127,22 @@ form {
   span a {
     color: color(primary);
   }
+
+  button {
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    display: flex;
+
+    img {
+      width: 2.3em;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(0.8);
+      }
+    }
+  }
 }
 
 .form-respond {
