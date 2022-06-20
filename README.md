@@ -94,6 +94,3 @@ test
 # Contributors
 
 We worked as a team of 4 with the following team members: [Ruben Finnerud](https://github.com/rubenfin), [Vanessa Choe](https://github.com/VanessaChoe), [Dave Dankwah](https://github.com/davidsd29) and [Roshnie de Groen](https://github.com/rvdegroen).
-
-
-test
