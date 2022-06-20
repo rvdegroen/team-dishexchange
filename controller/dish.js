@@ -53,7 +53,7 @@ const deleteOne = async (req, res) => {
     const query = { _id: new ObjectId(req.body.delete) };
     await dishesCollection.deleteOne(query);
 
-    res.redirect("/dishes-overview")
+    res.redirect("/dishes-overview");
     // if something goes wrong then it will stop the code in try and go to catch to show the error on the add-dish page
   } catch (err) {
     res.status(400).send(err.message);
