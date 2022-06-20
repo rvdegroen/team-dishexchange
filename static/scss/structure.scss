@@ -101,6 +101,10 @@ body {
     grid-template-columns: 1fr 2fr;
     grid-template-areas: "one two";
     box-shadow: 0 2px 10px color(box-shadow-blur);
+
+    > div {
+      display: contents;
+    }
   }
   .dishText {
     grid-area: two;
