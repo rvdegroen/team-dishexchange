@@ -12,6 +12,7 @@ const methodOverride = require("method-override");
 const connectDB = require("./config/db");
 const helmet = require("helmet");
 const initializePassport = require("./config/passport-config");
+const compression = require("compression");
 
 initializePassport(
   passport,
@@ -21,12 +22,11 @@ initializePassport(
 
 // VARIABLES
 const app = express();
-app.use(helmet())
+app.use(helmet());
 // CONFIGURATION
 // sets configuration
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
 
 // GLOBAL VARIABLES DATABASE - AFTER CLIENT IS CONNECTED
 // Variable of the database dish-exchange
@@ -47,8 +47,9 @@ const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
 const favorite = require("./routers/liking");
 
-
 // MIDDLEWARE
+
+app.use(compression());
 app.use(express.static("static"));
 // parse application/json
 app.use(bodyParser.json());
