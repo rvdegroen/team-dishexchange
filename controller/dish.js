@@ -1,6 +1,5 @@
 const { ObjectId } = require("mongodb");
 const passport = require("passport");
-// add-dish post into mongoDB
 const add = async (req, res) => {
   const sessionUser = req.session.passport.user;
 

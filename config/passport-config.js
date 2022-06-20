@@ -1,14 +1,11 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const connectDB = require("./db");
-const { ObjectId } = require("mongodb");
 
-connectDB();
+const { ObjectId } = require("mongodb");
 
 async function initialize(passport) {
 
   const authenticateUser = async (email, password, done) => {
-    // const user = getUserByEmail(email);
 
     const user = await userCollection.findOne({email : email});
 

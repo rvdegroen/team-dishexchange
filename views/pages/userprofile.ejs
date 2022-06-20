@@ -1,0 +1,41 @@
+<%-include('../partials/header');%>
+
+<div class="user"></div>
+<nav class="profile">
+  <h1><%-include('../partials/back')%> My profile</h1>
+  <aside>
+    <a href="/edit-profile" class="btn edit">Edit</a>
+    <form action="/profile/delete?_method=DELETE" method="POST">
+      <button type="submit" class="deleteButton">Delete profile</button>
+    </form>
+  </aside>
+</nav>
+
+<div class="profile-info">
+  <section>
+    <h3>Name</h3>
+    <p><%= user.name %></p>
+    <h2>Account</h2>
+    <h3>Username</h3>
+    <p><%= user.username %></p>
+    <h3>Email</h3>
+    <p><%= user.email %></p>
+    <h3>Phone number</h3>
+    <p><%= user.phone %></p>
+
+    <h3>Password</h3>
+    <button class="btn">Change password</button>
+  </section>
+
+  <section>
+    <h2>Personal information</h2>
+    <h3>Country</h3>
+    <p><%= user.country %></p>
+    <h3>City</h3>
+    <p><%= user.city %></p>
+    <h3>Date of Birth</h3>
+    <p><%= user.dob %></p>
+  </section>
+</div>
+
+<%-include('../partials/footer');%>

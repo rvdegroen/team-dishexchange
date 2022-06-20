@@ -1,20 +1,19 @@
 <%-include('../partials/header');%>
-<nav>
-    <a href="/favorite-dishes" id="favoritesButton"><img src="/images/img/like.png" alt="Favorite dishes" /></a>
+<nav class="icons">
+  <form action="/logout?_method=DELETE" method="POST">
+    <button type="submit" id="logout" class="deleteButton">Log out</button>
+  </form>
+  <aside>
+    <a href="/favorite-dishes"><img src="/images/img/like.png" alt="Favorite dishes Icon" /></a>
+    <a href="/profile"><img src="/images/img/user.png" alt="User Icon" /></a>
+  </aside>
 </nav>
 
-<form action="/logout?_method=DELETE" method="POST">
-    <button type="submit" id="logout" class="deleteButton">Log out</button>
-</form>
-    <h1>Hi <%= user.name %> Your Menu</h1>
-    <h2><%= numberOfDishes %> dishes</h2>
-    
-        <div class="dish-frame">
+<h1>Hi <%= user.name %> Your Menu</h1>
+<h2><%= numberOfDishes %> dishes</h2>
 
-        <%-include('../partials/dish') %>
+<div class="dish-frame"><%-include('../partials/dish') %></div>
 
-        </div>
-
-    <a href="/add-dishes" class="floatingActionButton">+</a>
+<a href="/add-dishes" class="floatingActionButton">+</a>
 
 <%-include('../partials/footer');%>

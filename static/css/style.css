@@ -1,6 +1,6 @@
 body {
   background-color: #f3f3f3;
-  padding: 20px 40px;
+  padding: 20px;
 }
 
 .hidden {
@@ -14,13 +14,16 @@ body {
 
 .btn {
   width: 100%;
-  padding: 12px 20px;
+  padding: 0.9em;
   margin: 1em 0;
   text-align: center;
   border: 3px solid #41c1a5;
   border-radius: 5px;
   color: #f3f3f3;
   background-color: #41c1a5;
+}
+.btn:hover {
+  opacity: 0.5;
 }
 
 .primaryButton {
@@ -34,17 +37,14 @@ body {
   display: block;
   text-align: center;
   margin: 1em 0;
-  width: 60%;
   padding: 0.9em;
   border-radius: 3px;
   background-color: #ed6f6f;
   border: none;
   color: #ffffff;
 }
-
-#logout {
-  width: 25%;
-  margin-bottom: 1em;
+.deleteButton:hover {
+  opacity: 0.5;
 }
 
 .start-options {
@@ -75,14 +75,15 @@ body {
   font-weight: 700;
 }
 
-.backButton {
-  padding-right: 1em;
-}
 .backButton:hover {
   color: #4f4f4f;
 }
 .backButton:active {
   color: #4f4f4f;
+}
+
+.profile-info {
+  margin-top: 1em;
 }
 
 .dish-frame article {
@@ -120,31 +121,34 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.dish-frame form button {
-  color: transparent;
-  background-color: transparent;
-  border: none;
-  display: flex;
-}
-.dish-frame form button img {
-  width: 2.3em;
-  cursor: pointer;
-}
-.dish-frame form button img:hover {
-  transform: scale(0.8);
-}
-
-.qualityText {
+.dish-frame .qualityText {
   font-size: 0.9em;
   padding-top: 10px;
 }
-
-.dishCover {
+.dish-frame .dishCover {
   width: 100%;
   max-height: 240px;
   margin-bottom: 20px;
   border-radius: 5px;
   object-fit: cover;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav aside {
+  display: flex;
+}
+nav aside form {
+  margin-left: 1em;
+}
+nav a img {
+  width: 2.5em;
+}
+nav a:first-of-type img {
+  margin-right: 1.5em;
 }
 
 footer {
@@ -241,7 +245,8 @@ form fieldset {
   display: flex;
   flex-direction: column;
 }
-form fieldset legend {
+form fieldset legend,
+form fieldset label {
   padding-bottom: 10px;
   font-weight: bold;
   color: #4f4f4f;
@@ -308,6 +313,19 @@ form fieldset label {
 form span a {
   color: #41c1a5;
 }
+form button {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
+form button img {
+  width: 2.3em;
+  cursor: pointer;
+}
+form button img:hover {
+  transform: scale(0.8);
+}
 
 .form-respond {
   position: absolute;
@@ -331,15 +349,6 @@ form span a {
 .form-respond p:last-of-type {
   line-height: 20px;
   margin-bottom: 20px;
-}
-
-#favoritesButton {
-  background-color: transparent;
-  border: none;
-  margin-left: 97%;
-}
-#favoritesButton img {
-  width: 2.5em;
 }
 
 * {
