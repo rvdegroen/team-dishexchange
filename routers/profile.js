@@ -1,10 +1,10 @@
 const express = require("express");
 
-const profile = express.Router();
+const app = express.Router();
 
 // Profile VOORDBEELD
-profile.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.render("pages/register");
 });
 
-module.exports = profile;
+module.exports = app;

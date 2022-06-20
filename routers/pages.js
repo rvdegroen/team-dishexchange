@@ -2,9 +2,7 @@ const express = require("express");
 const { ObjectId } = require("mongodb");
 
 const app = express.Router();
-const checkAuthenticated = require('../controller/authenticate');
-
-
+const checkAuthenticated = require("../controller/authenticate");
 
 // HOME
 app.get("/", async (req, res) => {
@@ -35,7 +33,6 @@ app.get("/dishes-overview", checkAuthenticated, async (req, res) => {
   }
 });
 
-
 app.get("/add-dishes", checkAuthenticated, (req, res) => {
   res.render("pages/add-dish");
 });
@@ -60,7 +57,6 @@ app.get("/favorite-dishes", checkAuthenticated, async (req, res) => {
     })
     .toArray();
 
-
   res.render("pages/favo-dish", { myDishes });
 });
 
@@ -74,7 +70,6 @@ app.get("/edit-dish/:dishId", checkAuthenticated, async (req, res) => {
     dish,
   });
 });
-
 
 // USER ROUTES
 app.get("/register", (req, res) => {
@@ -97,10 +92,5 @@ app.delete("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-
-
-
-
-
 
 module.exports = app;

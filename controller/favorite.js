@@ -1,10 +1,6 @@
-const express = require("express");
-
 const { ObjectId } = require("mongodb");
 
-const favorite = express.Router();
-
-favorite.post("/like", async (req, res) => {
+const like = async (req, res) => {
   await dishesCollection.updateOne(
     {
       _id: ObjectId(req.body.like),
@@ -14,9 +10,9 @@ favorite.post("/like", async (req, res) => {
     }
   );
   res.redirect("/favorite-dishes");
-});
+};
 
-favorite.post("/dislike", async (req, res) => {
+const dislike = async (req, res) => {
   await dishesCollection.updateOne(
     {
       _id: ObjectId(req.body.dislike),
@@ -27,6 +23,6 @@ favorite.post("/dislike", async (req, res) => {
   );
 
   res.redirect("/dishes-overview");
-});
+};
 
-module.exports = favorite;
+module.exports = { like, dislike };

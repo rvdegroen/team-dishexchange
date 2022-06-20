@@ -39,10 +39,12 @@ connectDB();
 
 // ROUTES
 const main = require("./routers/pages");
-const user = require("./routers/user");
+const register = require("./routers/register");
+const login = require("./routers/login");
 const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
-const favorite = require("./routers/like");
+const favorite = require("./routers/liking");
+
 
 // MIDDLEWARE
 app.use(express.static("static"));
@@ -63,10 +65,11 @@ app.use(passport.session());
 app.use(methodOverride("_method"));
 
 app.use("/", main);
-app.use("/user/", user);
-app.use("/profile/", profile);
-app.use("/dishes/", dishes);
-app.use("/favorite/", favorite);
+app.use("/login", login);
+app.use("/register", register);
+app.use("/profile", profile);
+app.use("/dishes", dishes);
+app.use("/favorite", favorite);
 app.use((req, res) => {
   res.status(404).send("This page does not exist!");
 }); // 404 error pages
