@@ -9,8 +9,9 @@ const session = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const connectDB = require("./config/db");
+const compression = require("compression");
 const helmet = require("helmet");
+const connectDB = require("./config/db");
 const initializePassport = require("./config/passport-config");
 
 initializePassport(
@@ -21,12 +22,11 @@ initializePassport(
 
 // VARIABLES
 const app = express();
-app.use(helmet())
+app.use(helmet());
 // CONFIGURATION
 // sets configuration
 app.set("view engine", "ejs");
 app.set("views", "./views");
-
 
 // GLOBAL VARIABLES DATABASE - AFTER CLIENT IS CONNECTED
 // Variable of the database dish-exchange
@@ -47,8 +47,9 @@ const profile = require("./routers/profile");
 const dishes = require("./routers/dishes");
 const favorite = require("./routers/liking");
 
-
 // MIDDLEWARE
+
+app.use(compression({ level: 9 }));
 app.use(express.static("static"));
 // parse application/json
 app.use(bodyParser.json());
