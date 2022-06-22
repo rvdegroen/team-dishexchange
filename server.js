@@ -49,7 +49,7 @@ const favorite = require("./routers/liking");
 
 // MIDDLEWARE
 
-app.use(compression());
+app.use(compression({ level: 9 }));
 app.use(express.static("static"));
 // parse application/json
 app.use(bodyParser.json());
