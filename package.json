@@ -4,8 +4,9 @@
   "description": "This is a feature to add dishes, made for the dish-exchange concept.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "parcel ./static/js/register-valid.js",
+    "build": "parcel build ./static/js/register-valid.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.16",
+    "parcel-bundler": "^1.12.5",
     "prettier": "^2.6.2"
   },
   "dependencies": {
