@@ -28,10 +28,11 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-sass": "^5.1.0",
-    "gulp-watch": "^5.0.1",
     "nodemon": "^2.0.16",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "sass": "^1.53.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
