@@ -4,8 +4,8 @@
   "description": "This is a feature to add dishes, made for the dish-exchange concept.",
   "main": "server.js",
   "scripts": {
-    "dev": "parcel ./static/js/register-valid.js",
-    "build": "parcel build ./static/js/register-valid.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "repository": {
