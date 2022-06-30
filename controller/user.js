@@ -16,7 +16,6 @@ const register = async (req, res) => {
       password: hashedPassword,
       mydish: [],
     });
-    res.redirect("/register");
   } catch {
     res.status(400).send(err.message);
   }

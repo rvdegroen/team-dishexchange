@@ -28,7 +28,7 @@
     </ul>
     
     <div class="editButtons">
-      <a href="/edit-dish/<%=dish._id%>" class="primaryButton">Edit</a>
+      <a href="/edit-dish/<%=dish._id%>" class="btn">Edit</a>
       <form action="/dishes/delete?_method=DELETE" method="POST">
         <button type="submit" name="delete" class="deleteButton" value="<%=dish._id%>">Delete</button>
       </form>
